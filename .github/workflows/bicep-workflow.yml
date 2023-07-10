@@ -1,27 +1,27 @@
 on: [push]
 name: Azure ARM
 jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    steps:
-
-      # Checkout code
-    - uses: actions/checkout@main
-
-      # Log into Azure
-    - uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      # Deploy Bicep file
-    - name: Bicep Deployment
-      uses: azure/arm-deploy@v1
-      with:
-        subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
-        resourceGroupName: ${{ secrets.AZURE_RG }}
-        template: ./pattern/storage.bicep
-        parameters: 'storagePrefix=mystore storageSKU=Standard_LRS'
-        failOnStdErr: false
+#  build-and-deploy:
+#    runs-on: ubuntu-latest
+#    steps:
+#
+#      # Checkout code
+#    - uses: actions/checkout@main
+#
+#      # Log into Azure
+#    - uses: azure/login@v1
+#      with:
+#        creds: ${{ secrets.AZURE_CREDENTIALS }}
+#
+#      # Deploy Bicep file
+#    - name: Bicep Deployment
+#      uses: azure/arm-deploy@v1
+#      with:
+#        subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+#        resourceGroupName: ${{ secrets.AZURE_RG }}
+#        template: ./pattern/storage.bicep
+#        parameters: 'storagePrefix=mystore storageSKU=Standard_LRS'
+#        failOnStdErr: false
         
   build-storage-from-ACR:
         runs-on: ubuntu-latest
@@ -42,5 +42,5 @@ jobs:
             subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
             resourceGroupName: ${{ secrets.AZURE_RG }}
             template: ./pattern/main-storage.bicep
-            parameters: 'storagePrefix=mystore storageSKU=Standard_LRS'
+            #parameters: 'storagePrefix=mystore storageSKU=Standard_LRS'
             failOnStdErr: false
