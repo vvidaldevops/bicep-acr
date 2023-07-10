@@ -12,3 +12,4 @@ module storageAccountModule 'br:vidalabacr.azurecr.io/bicepmodules/storage:v1' =
 
 output storageAccountId string = storageAccountModule.outputs.storageAccountId
 //output storageAccountConnectionString string = storageAccountModule.outputs.storageAccountConnectionString
+//
