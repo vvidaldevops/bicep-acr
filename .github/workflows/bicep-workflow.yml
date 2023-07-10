@@ -1,22 +1,20 @@
 on: [push]
 name: Azure ARM
 jobs:
-  Bicep-Deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
 
       # Checkout code
-    - name: Checkout Repo  
     - uses: actions/checkout@main
 
       # Log into Azure
-    - name: Azure Login  
     - uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       # Deploy Bicep file
-    - name: Bicep Deployment
+    - name: deploy
       uses: azure/arm-deploy@v1
       with:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
