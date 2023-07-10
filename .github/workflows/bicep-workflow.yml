@@ -9,7 +9,7 @@ jobs:
     - uses: actions/checkout@main
 
       # Log into Azure
-    - name: Azure Login  
+    - name: Azure_Login  
     - uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
@@ -17,7 +17,7 @@ jobs:
       # Review
     
       # Deploy Bicep file
-    - name: Bicep Deploy
+    - name: Bicep_Deploy
       uses: azure/arm-deploy@v1
       with:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
