@@ -14,13 +14,21 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       # Deploy Bicep file
-    - name: Bicep Deployment
+    - name: Storage Deployment
       uses: azure/arm-deploy@v1
       with:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
         resourceGroupName: ${{ secrets.AZURE_RG }}
         template: deployment/storage-resource.bicep
-        #  ../deployment/appservice-resource.bicep
-        #  ../deployment/storage-resource.bicep
+        #parameters: 'storagePrefix=mystore storageSKU=Standard_LRS'
+        failOnStdErr: false
+
+      # Deploy Bicep file
+    - name: AppService Deployment
+      uses: azure/arm-deploy@v1
+      with:
+        subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+        resourceGroupName: ${{ secrets.AZURE_RG }}
+        template: deployment/appservice-resource.bicep
         #parameters: 'storagePrefix=mystore storageSKU=Standard_LRS'
         failOnStdErr: false
