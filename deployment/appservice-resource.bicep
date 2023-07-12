@@ -16,7 +16,7 @@ param workspaceId string ='/subscriptions/ea93148e-4b2f-4f06-b7fb-2c8ecc309d3f/r
 var appServicePlanName = 'vidal-lab-plan'
 
 // App Service
-module app 'br:acrlabvidal.azurecr.io/bicep/components/appservice:v1' = {
+module app 'br/ACR-LAB:bicep/components/appservice:v1' = {
   name: 'appservice-module-acr'
   params: {
     appServiceAppName: appServiceAppName
