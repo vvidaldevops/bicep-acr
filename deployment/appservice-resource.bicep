@@ -23,6 +23,5 @@ module app 'br/ACR-LAB:bicep/components/appservice:v1' = {
     appServicePlanName: appServicePlanName
     location: location
     workspaceId: workspaceId
-    appServicePlanId: appServicePlanModule.outputs.appServicePlanId
   }
 }
