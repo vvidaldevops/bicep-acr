@@ -1,3 +1,4 @@
+/*
 @allowed([
   'prod'
   'nonprod'
@@ -8,13 +9,16 @@ param environment string = 'nonprod'
   'setf'
   'jmfe'
 ])
+
 param bu string = 'jmfe'
+
+*/
+
+//var storageAccountName = toLower('stg-${bu}-${environment}')
+// storage-bu-environment-prodname-appname-role-appId2-corepurpose
 param workspaceId string ='e6de0976-e950-49ff-9090-70784bd9b6dc'
 
-var storageAccountName = toLower('stg-${bu}-${environment}')
-// storage-bu-environment-prodname-appname-role-appId2-corepurpose
-
-//param storageAccountName string = 'testestgvidal'
+param storageAccountName string = 'testestgvidal'
 
 param location string = 'eastus'
 param accountTier string = 'Standard_LRS'
