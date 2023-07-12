@@ -13,3 +13,64 @@ az ad sp create-for-rbac --name BicepACR --role contributor --scopes /subscripti
   "galleryEndpointUrl": "https://gallery.azure.com/",
   "managementEndpointUrl": "https://management.core.windows.net/"
 }
+
+
+
+
+{
+  "versions": [
+    {
+      "version": "1.0.0",
+      "releaseDate": "2023-06-30",
+      "author": "John Doe",
+      "buildNumber": 12345,
+      "description": "This is the first major release of the application.",
+      "changelog": [
+        {
+          "version": "1.0.0",
+          "date": "2023-06-30",
+          "changes": [
+            "Added new feature X",
+            "Fixed issue Y",
+            "Improved performance"
+          ]
+        }
+      ]
+    },
+    {
+      "version": "2.0.0",
+      "releaseDate": "2023-09-15",
+      "author": "Jane Smith",
+      "buildNumber": 54321,
+      "description": "This is a major update with significant changes.",
+      "changelog": [
+        {
+          "version": "2.0.0",
+          "date": "2023-09-15",
+          "changes": [
+            "Revamped user interface",
+            "Added advanced functionality",
+            "Optimized database queries"
+          ]
+        },
+        {
+          "version": "1.1.0",
+          "date": "2023-07-10",
+          "changes": [
+            "Implemented feature Z",
+            "Enhanced security measures"
+          ]
+        },
+        {
+          "version": "1.0.0",
+          "date": "2023-06-30",
+          "changes": [
+            "Added new feature X",
+            "Fixed issue Y",
+            "Improved performance"
+          ]
+        }
+      ]
+    }
+  ]
+}
