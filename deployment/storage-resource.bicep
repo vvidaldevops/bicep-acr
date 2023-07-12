@@ -16,7 +16,7 @@ param bu string = 'jmfe'
 
 //var storageAccountName = toLower('stg-${bu}-${environment}')
 // storage-bu-environment-prodname-appname-role-appId2-corepurpose
-param workspaceId string ='e6de0976-e950-49ff-9090-70784bd9b6dc'
+param workspaceId string ='/subscriptions/ea93148e-4b2f-4f06-b7fb-2c8ecc309d3f/resourceGroups/DefaultResourceGroup-CUS/providers/Microsoft.OperationalInsights/workspaces/DefaultWorkspace-ea93148e-4b2f-4f06-b7fb-2c8ecc309d3f-CUS'
 
 param storageAccountName string = 'testestgvidal'
 
