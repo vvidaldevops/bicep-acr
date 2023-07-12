@@ -1,4 +1,18 @@
-param storageAccountName string = 'testestgvidal'
+@allowed([
+  'prod'
+  'nonprod'
+])
+param environment string = 'NonProd'
+
+@allowed([
+  'setf'
+  'jmfe'
+])
+param bu string = 'jmfe'
+
+var storageAccountName = toLower('stgvidal-${environment}-${bu}')
+//param storageAccountName string = 'testestgvidal'
+
 param location string = 'eastus'
 param accountTier string = 'Standard_LRS'
 
