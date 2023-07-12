@@ -2,7 +2,7 @@
   'prod'
   'nonprod'
 ])
-param environment string = 'NonProd'
+param environment string = 'nonprod'
 
 @allowed([
   'setf'
@@ -10,7 +10,9 @@ param environment string = 'NonProd'
 ])
 param bu string = 'jmfe'
 
-var storageAccountName = toLower('stgvidal-${environment}-${bu}')
+var storageAccountName = toLower('stg-${bu}-${environment}')
+// storage-bu-environment-prodname-appname-role-appId2-corepurpose
+
 //param storageAccountName string = 'testestgvidal'
 
 param location string = 'eastus'
