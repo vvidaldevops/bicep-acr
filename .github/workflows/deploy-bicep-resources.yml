@@ -1,7 +1,7 @@
 on: [push]
 name: Azure ARM
 jobs:
-  deploy-from-ACR:
+  Deploy-Bicep-from-ACR:
     runs-on: ubuntu-latest
     steps:
 
