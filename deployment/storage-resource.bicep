@@ -9,7 +9,7 @@ param environment string = 'nonprod'
   'jmfe'
 ])
 param bu string = 'jmfe'
-param workspaceId ='e6de0976-e950-49ff-9090-70784bd9b6dc'
+param workspaceId string ='e6de0976-e950-49ff-9090-70784bd9b6dc'
 
 var storageAccountName = toLower('stg-${bu}-${environment}')
 // storage-bu-environment-prodname-appname-role-appId2-corepurpose
