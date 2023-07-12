@@ -16,7 +16,7 @@ az ad sp create-for-rbac --name BicepACR --role contributor --scopes /subscripti
 
 
 
-
+### JSON TO CONTROL THE VERSIONS
 {
   "versions": [
     {
@@ -74,3 +74,24 @@ az ad sp create-for-rbac --name BicepACR --role contributor --scopes /subscripti
     }
   ]
 }
+
+
+### bicepconfig.json
+// For using alias inside de modules
+
+/*
+{
+    "moduleAliases": {
+      "ts": {},
+      "br": {
+        "my-acr": {
+          "registry": "vidalabacr.azurecr.io"
+        }
+      }
+    }
+  }
+
+*/
+
+//Here, We’ve aliased my ACR login server URL as my-acr, so we can reference the module 
+// using this format: br/<module-alias>:<module-name-or-path>:<tag>.
