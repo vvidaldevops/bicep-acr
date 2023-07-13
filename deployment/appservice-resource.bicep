@@ -21,7 +21,7 @@ param workspaceId string ='/subscriptions/ea93148e-4b2f-4f06-b7fb-2c8ecc309d3f/r
 //------------------------------------------------------------------------------------------------
 
 // App Service
- module appService 'br/ACR-LAB:bicep/patterns/appservice:v2' = {
+ module appService 'br/ACR-LAB:bicep/patterns/appservice:v3' = {
 //  module appService '../../../08-BICEP-ACR-PUBLISH/bicep-modules/modules/patterns/appservice/simple-appservice.bicep' = {
   name: 'appServiceModule2'
   params: {
