@@ -7,7 +7,7 @@ param accountTier string = 'Standard_LRS'
 //-----------------------------------------------------------------------------------------------
 
 // Storage Account
-module storageAccountModule 'br/ACR-LAB:bicep/patterns/simple-storage:v1' = {
+module storageAccountModule 'br/ACR-LAB:bicep/patterns/simple-storage:v2' = {
   name: 'storageAccountModule3'
   params: {
     storageAccountName: storageAccountName
