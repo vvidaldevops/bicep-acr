@@ -18,7 +18,7 @@ param workspaceId string ='/subscriptions/ea93148e-4b2f-4f06-b7fb-2c8ecc309d3f/r
 //param deployAppServicePlan bool = false
 
 
-//-----------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------
 
 // App Service
  module appService 'br/ACR-LAB:bicep/patterns/appservice:v2' = {
