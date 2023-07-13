@@ -29,7 +29,7 @@ param accountTier string = 'Standard_LRS'
 //------------------------------------------------------------------------------------------------
 
 // App Service
- module appService 'br/ACR-LAB:bicep/patterns/appservice:v1' = {
+ module appService 'br/ACR-LAB:bicep/patterns/simple-appservice:v1' = {
   name: 'appServiceModule2'
   params: {
     appServiceAppName: appServiceAppName
