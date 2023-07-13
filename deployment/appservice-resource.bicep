@@ -13,23 +13,27 @@ param appServicePlanName string = 'vidal-lab-plan'
 
 //@description('Indicates whether a CDN should be deployed.')
 //param deployCdn bool = true
+//param AppServicePlanID string
 
 
 // App Service Plan
-module appserviceplan 'br/ACR-LAB:bicep/components/appserviceplan:v1' = {
-  name: 'appserviceplan-module'
-}
-output appServicePlanOutput string = appserviceplan.outputs.appServicePlanId
-
+//module appServicePlanModule 'br/ACR-LAB:bicep/components/appserviceplan:v1' = {
+//  name: 'appServicePlanModule'
+//  params: {
+//    location: location
+//    appServicePlanName: appServicePlanName
+//    workspaceId: workspaceId
+//  }
+//}
 
 // App Service
-module appservice 'br/ACR-LAB:bicep/components/appservice:v1' = {
+module AppService 'br/ACR-LAB:bicep/patterns/appservice:v1' = {
   name: 'appservice-module'
   params: {
     appServiceAppName: appServiceAppName
-    appServicePlanName: appServicePlanName
     location: location
     workspaceId: workspaceId
-    AppServicePlanID: appServicePlanOutput
+    appServicePlanName: appServicePlanName
+    //AppServicePlanID: appServicePlanModule.outputs.AppServicePlanIdB
   }
 }
