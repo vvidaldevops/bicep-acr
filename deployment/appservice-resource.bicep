@@ -4,7 +4,7 @@ param location string = resourceGroup().location
 @description('The name of the App Service app.')
 param appServiceAppName string = 'vidal-lab-app${uniqueString(resourceGroup().id)}'
 
-param workspaceId string ='/subscriptions/ea93148e-4b2f-4f06-b7fb-2c8ecc309d3f/resourceGroups/DefaultResourceGroup-CUS/providers/Microsoft.OperationalInsights/workspaces/DefaultWorkspace-ea93148e-4b2f-4f06-b7fb-2c8ecc309d3f-CUS'
+// param workspaceId string ='/subscriptions/ea93148e-4b2f-4f06-b7fb-2c8ecc309d3f/resourceGroups/DefaultResourceGroup-CUS/providers/Microsoft.OperationalInsights/workspaces/DefaultWorkspace-ea93148e-4b2f-4f06-b7fb-2c8ecc309d3f-CUS'
 
 param appServicePlanName string = 'vidal-lab-plan'
 
@@ -15,25 +15,15 @@ param appServicePlanName string = 'vidal-lab-plan'
 //param deployCdn bool = true
 //param AppServicePlanID string
 
-
-// App Service Plan
-//module appServicePlanModule 'br/ACR-LAB:bicep/components/appserviceplan:v1' = {
-//  name: 'appServicePlanModule'
-//  params: {
-//    location: location
-//    appServicePlanName: appServicePlanName
-//    workspaceId: workspaceId
-//  }
-//}
-
 // App Service
-module AppService 'br/ACR-LAB:bicep/patterns/appservice:v1' = {
-  name: 'appservice-module'
+// module appService 'br/ACR-LAB:bicep/patterns/appservice:v1' = {
+  module appService '../../../08-BICEP-ACR-PUBLISH/bicep-modules/modules/patterns/appservice/simple-appservice.bicep' = {
+  name: 'appServiceModule2'
   params: {
     appServiceAppName: appServiceAppName
     location: location
-    workspaceId: workspaceId
+    // workspaceId: workspaceId
     appServicePlanName: appServicePlanName
-    //AppServicePlanID: appServicePlanModule.outputs.AppServicePlanIdB
+    
   }
 }
