@@ -16,8 +16,8 @@ param appServicePlanName string = 'vidal-lab-plan'
 //param AppServicePlanID string
 
 // App Service
-// module appService 'br/ACR-LAB:bicep/patterns/appservice:v1' = {
-  module appService '../../../08-BICEP-ACR-PUBLISH/bicep-modules/modules/patterns/appservice/simple-appservice.bicep' = {
+ module appService 'br/ACR-LAB:bicep/patterns/appservice:v1' = {
+//  module appService '../../../08-BICEP-ACR-PUBLISH/bicep-modules/modules/patterns/appservice/simple-appservice.bicep' = {
   name: 'appServiceModule2'
   params: {
     appServiceAppName: appServiceAppName
