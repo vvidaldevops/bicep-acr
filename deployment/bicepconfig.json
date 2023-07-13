@@ -1,7 +1,6 @@
-// For using alias inside de modules
+// Alias in the modules
 
-//Here, We’ve aliased my ACR login server URL as ACR-LAB, so we can reference the module 
-// using this format: br/<module-alias>:<module-name-or-path>:<tag>.
+// Here, We’ve aliased my ACR login server URL as ACR-LAB, so we can reference the module using this format: br/<module-alias>:<module-name-or-path>:<tag>.
 
 {
   "moduleAliases": {
