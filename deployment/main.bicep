@@ -28,8 +28,21 @@ param workspaceId string ='/subscriptions/ea93148e-4b2f-4f06-b7fb-2c8ecc309d3f/r
 param storageAccountName string = toLower('stg${bu}${environment}${appname}${role}${appId}')
 // storage-bu-environment-prodname-appname-role-appId2-corepurpose
 
+@allowed([
+  'Standard_LRS'
+  'Standard_ZRS'
+  'Standard_GRS'
+  'Standard_GZRS'
+  'Standard_RAGRS'
+  'Standard_RAGZRS'
+  'Premium_LRS'
+  'Premium_ZRS'
+])
 @description('The Storage Account tier')
 param accountTier string = 'Standard_LRS'
+
+@description('The Storage Account tier')
+param accessTier string = 'Hot'
 
 // param tags object = {
 //  owner: 'JM Family'
@@ -57,7 +70,7 @@ param appServicePlanName string = toLower('appsvcplan-${bu}-${environment}-${app
 
 // App Service
 //*****************************************************************************************************
- module appService 'br/ACR-LAB:bicep/patterns/simple-appservice:v1' = {
+ module appService 'br/ACR-LAB:bicep/patterns/simple-appservice:v1.1.0' = {
   name: 'appServiceModule2'
   params: {
     appServiceAppName: appServiceAppName
@@ -72,12 +85,13 @@ param appServicePlanName string = toLower('appsvcplan-${bu}-${environment}-${app
 
 // Storage Account
 //*****************************************************************************************************
-module storageAccountModule 'br/ACR-LAB:bicep/patterns/simple-storage:v1' = {
+module storageAccountModule 'br/ACR-LAB:bicep/patterns/simple-storage:v1.1.0' = {
   name: 'storageAccountModule2'
   params: {
     storageAccountName: storageAccountName
     location: location
     accountTier: accountTier
+    accessTier: accessTier
     workspaceId: workspaceId
     // tags: tags
   }
