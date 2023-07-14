@@ -14,9 +14,9 @@ param appId string = '01'
 @maxLength(6)
 param appname string = 'App123'
 
-// Storage Parameters
 
-@description('Provide a globally unique name for the Storage Account')
+// Storage Parameters
+@description('Globally unique name for the Storage Account')
 @minLength(3)
 @maxLength(24)
 param storageAccountName string = toLower('stg${bu}${environment}${appname}${role}${appId}')
@@ -30,27 +30,32 @@ param location string = resourceGroup().location
 @description('The ID of Log Analytics Workspace.')
 param workspaceId string ='/subscriptions/ea93148e-4b2f-4f06-b7fb-2c8ecc309d3f/resourceGroups/DefaultResourceGroup-CUS/providers/Microsoft.OperationalInsights/workspaces/DefaultWorkspace-ea93148e-4b2f-4f06-b7fb-2c8ecc309d3f-CUS'
 
-//------------------------------------------------------------------------------------------------
+// param TagDevEnvironment object = {
+//  owner: 'Vinicius Vidal'
+//  environment: 'Bicep'
+//}
 
 // App Service Parameters
-@description('The name of the App Service.')
-param appServiceAppName string = 'vidal-lab-app${uniqueString(resourceGroup().id)}'
+@description('Globally unique name for the App Service')
+@maxLength(60)
+param appServiceAppName string = toLower('appsvc-${bu}-${environment}-${appname}-${role}-${appId}')
+// appsvc-bu-environment-prodname-appname-role-appId2-corepurpose
+
+//@description('The name of the App Service.')
+//param appServiceAppName string = 'vidal-lab-app${uniqueString(resourceGroup().id)}'
 
 @description('The name of the App Service Plan.')
-param appServicePlanName string = 'vidal-lab-plan'
+param appServicePlanName string = toLower('appsvcplan-${bu}-${environment}-${appname}-${role}-${appId}')
 
 //@description('The name of the App Service plan SKU.')
 //param appServicePlanSkuName string = 'B1'
 
 //@description('Indicates whether a AppServicePlan should be deployed.')
 //param deployAppServicePlan bool = false
-
-//------------------------------------------------------------------------------------------------
-
+//*****************************************************************************************************
 
 
-//------------------------------------------------------------------------------------------------
-
+//*****************************************************************************************************
 // App Service
  module appService 'br/ACR-LAB:bicep/patterns/simple-appservice:v1' = {
   name: 'appServiceModule2'
@@ -59,11 +64,13 @@ param appServicePlanName string = 'vidal-lab-plan'
     location: location
     workspaceId: workspaceId
     appServicePlanName: appServicePlanName
+    // tags: TagPocEnvironment
   }
 }
+//*****************************************************************************************************
 
-//-----------------------------------------------------------------------------------------------
 
+//*****************************************************************************************************
 // Storage Account
 module storageAccountModule 'br/ACR-LAB:bicep/patterns/simple-storage:v1' = {
   name: 'storageAccountModule2'
@@ -72,5 +79,12 @@ module storageAccountModule 'br/ACR-LAB:bicep/patterns/simple-storage:v1' = {
     location: location
     accountTier: accountTier
     workspaceId: workspaceId
+    // tags: TagPocEnvironment
   }
 }
+//*****************************************************************************************************
+
+
+//*****************************************************************************************************
+// Function App
+//*****************************************************************************************************
