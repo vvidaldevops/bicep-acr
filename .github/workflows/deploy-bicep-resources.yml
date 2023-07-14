@@ -1,15 +1,43 @@
-on: [push]
 name: Azure ARM
-jobs:
-  Deploy-Bicep-from-ACR:
-    runs-on: ubuntu-latest
-    steps:
 
+on:
+  push:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+jobs:
+  Preview-Bicep-Changes:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout code
+    - uses: actions/checkout@v2
+                    
+      # Log into Azure
+    - name: Login to Azure  
+      uses: azure/login@v1.4.3
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    
+    - name: Preview Changes from Bicep
+      uses: Azure/deployment-what-if-action@v1.0.0
+      with:
+        subscription: ${{ secrets.SUBSCRIPTION_ID  }} 
+        resourceGroup: ${{ secrets.AZURE_RG }} 
+        templateFile: deployment/main.bicep
+        
+  Deploy-Azure-from-ACR:
+    environment: poc
+    needs: [Preview-Bicep-Changes]
+    runs-on: ubuntu-latest
+
+    steps:
       # Checkout code
     - uses: actions/checkout@main
 
       # Log into Azure
-    - uses: azure/login@v1
+    - uses: azure/login@v1.4.3
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
