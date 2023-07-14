@@ -1,3 +1,21 @@
+// TESTS USING NAME CONVENTION
+@allowed([ 'set', 'setf', 'jmf', 'jmfe' ])
+param bu string = 'jmf'
+
+@allowed([ 'poc', 'dev', 'qa', 'uat', 'pro[d' ])
+param environment string = 'poc'
+
+param role string = 'poctest'
+param appId string = '01'
+param appname string = 'PocApp'
+
+// EXAMPLE
+// storage-bu-environment-prodname-appname-role-appId2-corepurpose
+@minLength(3)
+@maxLength(24)
+@description('Provide a globally unique name of your Storage Account')
+param storageAccountName string = toLower('stg${bu}${environment}${appname}${role}${appId}')
+
 // Common Parameters
 @description('The Azure region into which the resources should be deployed.')
 param location string = resourceGroup().location
@@ -23,7 +41,7 @@ param appServicePlanName string = 'vidal-lab-plan'
 //------------------------------------------------------------------------------------------------
 
 // Storage Parameters
-param storageAccountName string = 'testestgvidal'
+// param storageAccountName string = 'testestgvidal'
 param accountTier string = 'Standard_LRS'
 
 //------------------------------------------------------------------------------------------------
