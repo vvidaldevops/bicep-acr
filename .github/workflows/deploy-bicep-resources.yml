@@ -28,7 +28,7 @@ jobs:
         templateFile: deployment/main.bicep
         
   Deploy-Azure-from-ACR:
-    environment: poc
+    environment: Deployment-POC
     needs: [Preview-Bicep-Changes]
     runs-on: ubuntu-latest
 
