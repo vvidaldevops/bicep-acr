@@ -23,7 +23,7 @@ jobs:
     - name: Preview Changes from Bicep
       uses: Azure/deployment-what-if-action@v1.0.0
       with:
-        subscription: ${{ secrets.SUBSCRIPTION_ID  }} 
+        subscription: ${{ secrets.AZURE_SUBSCRIPTION }} 
         resourceGroup: ${{ secrets.AZURE_RG }} 
         templateFile: deployment/main.bicep
         
