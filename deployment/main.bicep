@@ -5,16 +5,23 @@ param bu string = 'jmf'
 @allowed([ 'poc', 'dev', 'qa', 'uat', 'pro[d' ])
 param environment string = 'poc'
 
-param role string = 'poctest'
-param appId string = '01'
-param appname string = 'PocApp'
+@maxLength(6)
+param role string = 'automa'
 
-// EXAMPLE
-// storage-bu-environment-prodname-appname-role-appId2-corepurpose
+@maxLength(2)
+param appId string = '01'
+
+@maxLength(6)
+param appname string = 'App123'
+
+// Storage Parameters
+
+@description('Provide a globally unique name for the Storage Account')
 @minLength(3)
 @maxLength(24)
-@description('Provide a globally unique name of your Storage Account')
 param storageAccountName string = toLower('stg${bu}${environment}${appname}${role}${appId}')
+// storage-bu-environment-prodname-appname-role-appId2-corepurpose
+param accountTier string = 'Standard_LRS'
 
 // Common Parameters
 @description('The Azure region into which the resources should be deployed.')
@@ -40,9 +47,7 @@ param appServicePlanName string = 'vidal-lab-plan'
 
 //------------------------------------------------------------------------------------------------
 
-// Storage Parameters
-// param storageAccountName string = 'testestgvidal'
-param accountTier string = 'Standard_LRS'
+
 
 //------------------------------------------------------------------------------------------------
 
