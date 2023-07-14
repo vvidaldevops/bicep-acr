@@ -1,8 +1,9 @@
-// TESTS USING NAME CONVENTION
+// Common Parameters
+//*****************************************************************************************************
 @allowed([ 'set', 'setf', 'jmf', 'jmfe' ])
 param bu string = 'jmf'
 
-@allowed([ 'poc', 'dev', 'qa', 'uat', 'pro[d' ])
+@allowed([ 'poc', 'dev', 'qa', 'uat', 'prd' ])
 param environment string = 'poc'
 
 @maxLength(6)
@@ -14,6 +15,11 @@ param appId string = '01'
 @maxLength(6)
 param appname string = 'App123'
 
+@description('The Azure region into which the resources should be deployed.')
+param location string = resourceGroup().location
+
+@description('The ID of Log Analytics Workspace.')
+param workspaceId string ='/subscriptions/ea93148e-4b2f-4f06-b7fb-2c8ecc309d3f/resourceGroups/DefaultResourceGroup-CUS/providers/Microsoft.OperationalInsights/workspaces/DefaultWorkspace-ea93148e-4b2f-4f06-b7fb-2c8ecc309d3f-CUS'
 
 // Storage Parameters
 @description('Globally unique name for the Storage Account')
@@ -21,18 +27,14 @@ param appname string = 'App123'
 @maxLength(24)
 param storageAccountName string = toLower('stg${bu}${environment}${appname}${role}${appId}')
 // storage-bu-environment-prodname-appname-role-appId2-corepurpose
+
+@description('The Storage Account tier')
 param accountTier string = 'Standard_LRS'
 
-// Common Parameters
-@description('The Azure region into which the resources should be deployed.')
-param location string = resourceGroup().location
-
-@description('The ID of Log Analytics Workspace.')
-param workspaceId string ='/subscriptions/ea93148e-4b2f-4f06-b7fb-2c8ecc309d3f/resourceGroups/DefaultResourceGroup-CUS/providers/Microsoft.OperationalInsights/workspaces/DefaultWorkspace-ea93148e-4b2f-4f06-b7fb-2c8ecc309d3f-CUS'
-
-// param TagDevEnvironment object = {
-//  owner: 'Vinicius Vidal'
-//  environment: 'Bicep'
+// param tags object = {
+//  owner: 'JM Family'
+//  environment: 'POC'
+//  IAC: 'Bicep'
 //}
 
 // App Service Parameters
@@ -41,9 +43,7 @@ param workspaceId string ='/subscriptions/ea93148e-4b2f-4f06-b7fb-2c8ecc309d3f/r
 param appServiceAppName string = toLower('appsvc-${bu}-${environment}-${appname}-${role}-${appId}')
 // appsvc-bu-environment-prodname-appname-role-appId2-corepurpose
 
-//@description('The name of the App Service.')
-//param appServiceAppName string = 'vidal-lab-app${uniqueString(resourceGroup().id)}'
-
+@maxLength(60)
 @description('The name of the App Service Plan.')
 param appServicePlanName string = toLower('appsvcplan-${bu}-${environment}-${appname}-${role}-${appId}')
 
@@ -55,8 +55,8 @@ param appServicePlanName string = toLower('appsvcplan-${bu}-${environment}-${app
 //*****************************************************************************************************
 
 
-//*****************************************************************************************************
 // App Service
+//*****************************************************************************************************
  module appService 'br/ACR-LAB:bicep/patterns/simple-appservice:v1' = {
   name: 'appServiceModule2'
   params: {
@@ -64,14 +64,14 @@ param appServicePlanName string = toLower('appsvcplan-${bu}-${environment}-${app
     location: location
     workspaceId: workspaceId
     appServicePlanName: appServicePlanName
-    // tags: TagPocEnvironment
+    // tags: tags
   }
 }
 //*****************************************************************************************************
 
 
-//*****************************************************************************************************
 // Storage Account
+//*****************************************************************************************************
 module storageAccountModule 'br/ACR-LAB:bicep/patterns/simple-storage:v1' = {
   name: 'storageAccountModule2'
   params: {
@@ -79,12 +79,13 @@ module storageAccountModule 'br/ACR-LAB:bicep/patterns/simple-storage:v1' = {
     location: location
     accountTier: accountTier
     workspaceId: workspaceId
-    // tags: TagPocEnvironment
+    // tags: tags
   }
 }
 //*****************************************************************************************************
 
 
-//*****************************************************************************************************
 // Function App
+//*****************************************************************************************************
+
 //*****************************************************************************************************
