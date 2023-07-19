@@ -70,7 +70,7 @@ param appServicePlanName string = toLower('appsvcplan-${bu}-${environment}-${app
 
 // App Service
 //*****************************************************************************************************
- module appService 'br/ACR-LAB:bicep/patterns/simple-appservice:v1.0.0' = {
+ module appService 'br/ACR-LAB:bicep/patterns/simple-appservice:v1.1.0' = {
   name: 'appServiceModule2'
   params: {
     appServiceAppName: appServiceAppName
@@ -85,7 +85,7 @@ param appServicePlanName string = toLower('appsvcplan-${bu}-${environment}-${app
 
 // Storage Account
 //*****************************************************************************************************
-module storageAccountModule 'br/ACR-LAB:bicep/patterns/simple-storage:v1.0.0' = {
+module storageAccountModule 'br/ACR-LAB:bicep/patterns/simple-storage:v1.1.0' = {
   name: 'storageAccountModule2'
   params: {
     storageAccountName: storageAccountName
