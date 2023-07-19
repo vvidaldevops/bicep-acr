@@ -19,7 +19,7 @@ param appname string = 'App123'
 param location string = resourceGroup().location
 
 @description('The ID of Log Analytics Workspace.')
-param workspaceId string ='/subscriptions/ea93148e-4b2f-4f06-b7fb-2c8ecc309d3f/resourceGroups/DefaultResourceGroup-CUS/providers/Microsoft.OperationalInsights/workspaces/DefaultWorkspace-ea93148e-4b2f-4f06-b7fb-2c8ecc309d3f-CUS'
+param workspaceId string ='/subscriptions/ea93148e-4b2f-4f06-b7fb-2c8ecc309d3f/resourceGroups/RG-JMF-POC-2/providers/Microsoft.OperationalInsights/workspaces/workspace-lab-jmf'
 
 // Storage Parameters
 @description('Globally unique name for the Storage Account')
@@ -70,7 +70,7 @@ param appServicePlanName string = toLower('appsvcplan-${bu}-${environment}-${app
 
 // App Service
 //*****************************************************************************************************
- module appService 'br/ACR-LAB:bicep/patterns/simple-appservice:v1.1.0' = {
+ module appService 'br/ACR-LAB:bicep/patterns/simple-appservice:v1.0.0' = {
   name: 'appServiceModule2'
   params: {
     appServiceAppName: appServiceAppName
@@ -85,7 +85,7 @@ param appServicePlanName string = toLower('appsvcplan-${bu}-${environment}-${app
 
 // Storage Account
 //*****************************************************************************************************
-module storageAccountModule 'br/ACR-LAB:bicep/patterns/simple-storage:v1.1.0' = {
+module storageAccountModule 'br/ACR-LAB:bicep/patterns/simple-storage:v1.0.0' = {
   name: 'storageAccountModule2'
   params: {
     storageAccountName: storageAccountName
