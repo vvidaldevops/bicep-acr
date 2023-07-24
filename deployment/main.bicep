@@ -89,7 +89,6 @@ param pvtEndpointSubnetId string = ''
     appServicePlanSkuName: appServicePlanSkuName
     useExistingAppServicePlan: useExistingAppServicePlan
     appServicePlanId: appServicePlanId
-    //useAppPrivateEndpoint: useAppPrivateEndpoint
     pvtEndpointSubnetId: pvtEndpointSubnetId
     // tags: tags
   }

@@ -13,7 +13,7 @@ param role string = 'automa'
 param appId string = '02'
 
 @maxLength(6)
-param appname string = 'App456'
+param appname string = 'App123'
 
 @description('The Azure region into which the resources should be deployed.')
 param location string = resourceGroup().location
@@ -56,18 +56,18 @@ param accessTier string = 'Hot'
 param appServiceAppName string = toLower('appsvc-${bu}-${environment}-${appname}-${role}-${appId}')
 // appsvc-bu-environment-prodname-appname-role-appId2-corepurpose
 
-@maxLength(60)
-@description('The name of the App Service Plan.')
-param appServicePlanName string = toLower('appsvcplan-${bu}-${environment}-${appname}-${role}-${appId}')
+// @maxLength(60)
+// @description('The name of the App Service Plan.')
+// param appServicePlanName string = toLower('appsvcplan-${bu}-${environment}-${appname}-${role}-${appId}')
 
-@description('The name of the App Service plan SKU.')
-param appServicePlanSkuName string = 'B1'
+// @description('The name of the App Service plan SKU.')
+// param appServicePlanSkuName string = 'B1'
 
 @description('Indicates whether an existing AppServicePlan should be used.')
 param useExistingAppServicePlan bool = true
 
 @description('If the above option is = true, the existing App Service Plan ID should be provided.')
-param appServicePlanId string = '/subscriptions/ea93148e-4b2f-4f06-b7fb-2c8ecc309d3f/resourceGroups/rg-jmf-poc-2/providers/Microsoft.Web/serverfarms/appsvc-jmf-poc-app123-automa-02'
+param appServicePlanId string = '/subscriptions/ea93148e-4b2f-4f06-b7fb-2c8ecc309d3f/resourceGroups/rg-jmf-poc-2/providers/Microsoft.Web/serverfarms/appsvcplan-jmf-poc-app123-automa-02'
 
 // @description('Indicates whether a Privante endpoint should be created.')
 // param useAppPrivateEndpoint bool = true
