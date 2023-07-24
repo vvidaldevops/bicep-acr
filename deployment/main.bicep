@@ -79,7 +79,7 @@ param pvtEndpointSubnetId string = ''
 
 // App Service
 //*****************************************************************************************************
- module appService 'br/ACR-LAB:bicep/patterns/appservice:v1.1.0' = {
+ module appService 'br/ACR-LAB:bicep/patterns/appservice:v1.0.0' = {
   name: 'appServiceModule2'
   params: {
     appServiceAppName: appServiceAppName
