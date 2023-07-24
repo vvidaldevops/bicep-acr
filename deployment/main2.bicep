@@ -68,12 +68,18 @@ param useExistingAppServicePlan bool = true
 
 @description('If the above option is = true, the existing App Service Plan ID should be provided.')
 param appServicePlanId string = '/subscriptions/ea93148e-4b2f-4f06-b7fb-2c8ecc309d3f/resourceGroups/rg-jmf-poc-2/providers/Microsoft.Web/serverfarms/appsvc-jmf-poc-app123-automa-02'
+
+// @description('Indicates whether a Privante endpoint should be created.')
+// param useAppPrivateEndpoint bool = true
+
+@description('The ID from Private Endpoint Subnet. If specified then the private endpoint will be created and associated to the Private Endpoint Subnet')
+param pvtEndpointSubnetId string = '/subscriptions/ea93148e-4b2f-4f06-b7fb-2c8ecc309d3f/resourceGroups/RG-JMF-POC-2/providers/Microsoft.Network/virtualNetworks/vnet-jmf-poc/subnets/PvtEndpointSubnet'
 //*****************************************************************************************************
 
 
 // App Service
 //*****************************************************************************************************
- module appService 'br/ACR-LAB:bicep/patterns/appservice:v1.0.0' = {
+ module appService 'br/ACR-LAB:bicep/patterns/appservice:v1.1.0' = {
   name: 'appServiceModule2'
   params: {
     appServiceAppName: appServiceAppName
@@ -83,6 +89,8 @@ param appServicePlanId string = '/subscriptions/ea93148e-4b2f-4f06-b7fb-2c8ecc30
     appServicePlanSkuName: appServicePlanSkuName
     useExistingAppServicePlan: useExistingAppServicePlan
     appServicePlanId: appServicePlanId
+    //useAppPrivateEndpoint: useAppPrivateEndpoint
+    pvtEndpointSubnetId: pvtEndpointSubnetId
     // tags: tags
   }
 }

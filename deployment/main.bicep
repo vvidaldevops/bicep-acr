@@ -68,12 +68,18 @@ param useExistingAppServicePlan bool = false
 
 @description('If the above option is = true, the existing App Service Plan ID should be provided.')
 param appServicePlanId string = ''
+
+// @description('Indicates whether a Privante endpoint should be created.')
+// param useAppPrivateEndpoint bool = false
+
+@description('The ID from Private Endpoint Subnet. If specified then the private endpoint will be created and associated to the Private Endpoint Subnet')
+param pvtEndpointSubnetId string = ''
 //*****************************************************************************************************
 
 
 // App Service
 //*****************************************************************************************************
- module appService 'br/ACR-LAB:bicep/patterns/appservice:v1.0.0' = {
+ module appService 'br/ACR-LAB:bicep/patterns/appservice:v1.1.0' = {
   name: 'appServiceModule2'
   params: {
     appServiceAppName: appServiceAppName
@@ -83,6 +89,8 @@ param appServicePlanId string = ''
     appServicePlanSkuName: appServicePlanSkuName
     useExistingAppServicePlan: useExistingAppServicePlan
     appServicePlanId: appServicePlanId
+    //useAppPrivateEndpoint: useAppPrivateEndpoint
+    pvtEndpointSubnetId: pvtEndpointSubnetId
     // tags: tags
   }
 }
@@ -91,7 +99,7 @@ param appServicePlanId string = ''
 
 // Storage Account
 //*****************************************************************************************************
-module storageAccountModule 'br/ACR-LAB:bicep/patterns/storage-account:v1.0.0' = {
+module storageAccountModule 'br/ACR-LAB:bicep/patterns/storage-account:v1.1.0' = {
   name: 'storageAccountModule2'
   params: {
     storageAccountName: storageAccountName
