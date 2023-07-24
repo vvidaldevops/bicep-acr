@@ -60,23 +60,29 @@ param appServiceAppName string = toLower('appsvc-${bu}-${environment}-${appname}
 @description('The name of the App Service Plan.')
 param appServicePlanName string = toLower('appsvcplan-${bu}-${environment}-${appname}-${role}-${appId}')
 
-//@description('The name of the App Service plan SKU.')
-//param appServicePlanSkuName string = 'B1'
+@description('The name of the App Service plan SKU.')
+param appServicePlanSkuName string = 'B1'
 
-//@description('Indicates whether a AppServicePlan should be deployed.')
-//param deployAppServicePlan bool = false
+@description('Indicates whether an existing AppServicePlan should be used.')
+param useExistingAppServicePlan bool = false
+
+@description('If the above option is = true, the existing App Service Plan ID should be provided.')
+param appServicePlanId string = ''
 //*****************************************************************************************************
 
 
 // App Service
 //*****************************************************************************************************
- module appService 'br/ACR-LAB:bicep/patterns/appservice:v1.1.0' = {
+ module appService 'br/ACR-LAB:bicep/patterns/appservice:v1.0.0' = {
   name: 'appServiceModule2'
   params: {
     appServiceAppName: appServiceAppName
     location: location
     workspaceId: workspaceId
     appServicePlanName: appServicePlanName
+    appServicePlanSkuName: appServicePlanSkuName
+    useExistingAppServicePlan: useExistingAppServicePlan
+    appServicePlanId: appServicePlanId
     // tags: tags
   }
 }
@@ -85,7 +91,7 @@ param appServicePlanName string = toLower('appsvcplan-${bu}-${environment}-${app
 
 // Storage Account
 //*****************************************************************************************************
-module storageAccountModule 'br/ACR-LAB:bicep/patterns/storage-account:v1.1.0' = {
+module storageAccountModule 'br/ACR-LAB:bicep/patterns/storage-account:v1.0.0' = {
   name: 'storageAccountModule2'
   params: {
     storageAccountName: storageAccountName
