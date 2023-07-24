@@ -67,7 +67,7 @@ param appServicePlanSkuName string = 'B1'
 param createNewAppServicePlan bool = false
 
 @description('If the above option is false, the existing App Service Plan ID should be provided.')
-param appServicePlanId string = '/subscriptions/ea93148e-4b2f-4f06-b7fb-2c8ecc309d3f/resourceGroups/rg-jmf-poc-2/providers/Microsoft.Web/serverfarms/appsvcplan-jmf-poc-app123-automa-02'
+param appServicePlanId string = '/subscriptions/ea93148e-4b2f-4f06-b7fb-2c8ecc309d3f/resourceGroups/rg-jmf-poc-2/providers/Microsoft.Web/serverfarms/appsvcplan-jmf-poc-app123-automa-existing'
 
 @description('The ID from Private Endpoint Subnet. If specified then the private endpoint will be created and associated to the Private Endpoint Subnet')
 param pvtEndpointSubnetId string = '/subscriptions/ea93148e-4b2f-4f06-b7fb-2c8ecc309d3f/resourceGroups/RG-JMF-POC-2/providers/Microsoft.Network/virtualNetworks/vnet-jmf-poc/subnets/PvtEndpointSubnet'
