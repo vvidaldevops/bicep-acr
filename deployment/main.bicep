@@ -19,7 +19,7 @@ param appname string = 'App123'
 param location string = resourceGroup().location
 
 @description('The ID of Log Analytics Workspace.')
-param workspaceId string ='/subscriptions/ea93148e-4b2f-4f06-b7fb-2c8ecc309d3f/resourceGroups/RG-JMF-POC-2/providers/Microsoft.OperationalInsights/workspaces/workspace-lab-jmf'
+param workspaceId string ='/subscriptions/ea93148e-4b2f-4f06-b7fb-2c8ecc309d3f/resourceGroups/RG-JMF-POC-2/providers/Microsoft.OperationalInsights/workspaces/workspace-lab-jmf-01'
 
 // Storage Parameters
 @description('Globally unique name for the Storage Account')
