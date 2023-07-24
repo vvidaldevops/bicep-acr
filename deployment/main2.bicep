@@ -10,7 +10,7 @@ param environment string = 'poc'
 param role string = 'automa'
 
 @maxLength(2)
-param appId string = '02'
+param appId string = 'existing'
 
 @maxLength(6)
 param appname string = 'App123'
