@@ -56,12 +56,12 @@ param accessTier string = 'Hot'
 param appServiceAppName string = toLower('appsvc-${bu}-${environment}-${appname}-${role}-${appId}')
 // appsvc-bu-environment-prodname-appname-role-appId2-corepurpose
 
-// @maxLength(60)
-// @description('The name of the App Service Plan.')
-// param appServicePlanName string = toLower('appsvcplan-${bu}-${environment}-${appname}-${role}-${appId}')
+@maxLength(60)
+@description('The name of the App Service Plan.')
+param appServicePlanName string = toLower('appsvcplan-${bu}-${environment}-${appname}-${role}-${appId}')
 
-// @description('The name of the App Service plan SKU.')
-// param appServicePlanSkuName string = 'B1'
+@description('The name of the App Service plan SKU.')
+param appServicePlanSkuName string = 'B1'
 
 @description('Indicates whether an existing AppServicePlan should be used.')
 param useExistingAppServicePlan bool = true
@@ -85,8 +85,8 @@ param pvtEndpointSubnetId string = '/subscriptions/ea93148e-4b2f-4f06-b7fb-2c8ec
     appServiceAppName: appServiceAppName
     location: location
     workspaceId: workspaceId
-    //appServicePlanName: appServicePlanName
-    //appServicePlanSkuName: appServicePlanSkuName
+    appServicePlanName: appServicePlanName
+    appServicePlanSkuName: appServicePlanSkuName
     useExistingAppServicePlan: useExistingAppServicePlan
     appServicePlanId: appServicePlanId
     pvtEndpointSubnetId: pvtEndpointSubnetId
