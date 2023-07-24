@@ -85,11 +85,10 @@ param pvtEndpointSubnetId string = '/subscriptions/ea93148e-4b2f-4f06-b7fb-2c8ec
     appServiceAppName: appServiceAppName
     location: location
     workspaceId: workspaceId
-    appServicePlanName: appServicePlanName
-    appServicePlanSkuName: appServicePlanSkuName
+    //appServicePlanName: appServicePlanName
+    //appServicePlanSkuName: appServicePlanSkuName
     useExistingAppServicePlan: useExistingAppServicePlan
     appServicePlanId: appServicePlanId
-    //useAppPrivateEndpoint: useAppPrivateEndpoint
     pvtEndpointSubnetId: pvtEndpointSubnetId
     // tags: tags
   }
