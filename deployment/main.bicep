@@ -99,7 +99,7 @@ param pvtEndpointSubnetId string = ''
 
 // Storage Account
 //*****************************************************************************************************
-module storageAccountModule 'br/ACR-LAB:bicep/patterns/storage-account:v1.1.0' = {
+module storageAccountModule 'br/ACR-LAB:bicep/patterns/storage-account:v1.0.0' = {
   name: 'storageAccountModule2'
   params: {
     storageAccountName: storageAccountName
