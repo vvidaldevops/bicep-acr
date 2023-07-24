@@ -63,14 +63,11 @@ param appServicePlanName string = toLower('appsvcplan-${bu}-${environment}-${app
 @description('The name of the App Service plan SKU.')
 param appServicePlanSkuName string = 'B1'
 
-@description('Indicates whether an existing AppServicePlan should be used.')
-param useExistingAppServicePlan bool = true
+@description('Indicates whether AppServicePlan should be created or using an existing one.')
+param createNewAppServicePlan bool = false
 
-@description('If the above option is = true, the existing App Service Plan ID should be provided.')
+@description('If the above option is false, the existing App Service Plan ID should be provided.')
 param appServicePlanId string = '/subscriptions/ea93148e-4b2f-4f06-b7fb-2c8ecc309d3f/resourceGroups/rg-jmf-poc-2/providers/Microsoft.Web/serverfarms/appsvcplan-jmf-poc-app123-automa-02'
-
-// @description('Indicates whether a Privante endpoint should be created.')
-// param useAppPrivateEndpoint bool = true
 
 @description('The ID from Private Endpoint Subnet. If specified then the private endpoint will be created and associated to the Private Endpoint Subnet')
 param pvtEndpointSubnetId string = '/subscriptions/ea93148e-4b2f-4f06-b7fb-2c8ecc309d3f/resourceGroups/RG-JMF-POC-2/providers/Microsoft.Network/virtualNetworks/vnet-jmf-poc/subnets/PvtEndpointSubnet'
@@ -87,7 +84,7 @@ param pvtEndpointSubnetId string = '/subscriptions/ea93148e-4b2f-4f06-b7fb-2c8ec
     workspaceId: workspaceId
     appServicePlanName: appServicePlanName
     appServicePlanSkuName: appServicePlanSkuName
-    useExistingAppServicePlan: useExistingAppServicePlan
+    createNewAppServicePlan: createNewAppServicePlan
     appServicePlanId: appServicePlanId
     pvtEndpointSubnetId: pvtEndpointSubnetId
     // tags: tags

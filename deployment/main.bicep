@@ -63,14 +63,11 @@ param appServicePlanName string = toLower('appsvcplan-${bu}-${environment}-${app
 @description('The name of the App Service plan SKU.')
 param appServicePlanSkuName string = 'B1'
 
-@description('Indicates whether an existing AppServicePlan should be used.')
-param useExistingAppServicePlan bool = false
+@description('Indicates whether AppServicePlan should be created or using an existing one.')
+param createNewAppServicePlan bool = true
 
 @description('If the above option is = true, the existing App Service Plan ID should be provided.')
 param appServicePlanId string = ''
-
-// @description('Indicates whether a Privante endpoint should be created.')
-// param useAppPrivateEndpoint bool = false
 
 @description('The ID from Private Endpoint Subnet. If specified then the private endpoint will be created and associated to the Private Endpoint Subnet')
 param pvtEndpointSubnetId string = ''
@@ -87,7 +84,7 @@ param pvtEndpointSubnetId string = ''
     workspaceId: workspaceId
     appServicePlanName: appServicePlanName
     appServicePlanSkuName: appServicePlanSkuName
-    useExistingAppServicePlan: useExistingAppServicePlan
+    createNewAppServicePlan: createNewAppServicePlan
     appServicePlanId: appServicePlanId
     pvtEndpointSubnetId: pvtEndpointSubnetId
     // tags: tags
