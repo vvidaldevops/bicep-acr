@@ -21,29 +21,6 @@ param location string = resourceGroup().location
 @description('The ID of Log Analytics Workspace.')
 param workspaceId string ='/subscriptions/ea93148e-4b2f-4f06-b7fb-2c8ecc309d3f/resourceGroups/RG-JMF-POC-2/providers/Microsoft.OperationalInsights/workspaces/workspace-lab-jmf-01'
 
-// Storage Parameters
-@description('Globally unique name for the Storage Account')
-@minLength(3)
-@maxLength(24)
-param storageAccountName string = toLower('stg${bu}${environment}${appname}${role}${appId}')
-// storage-bu-environment-prodname-appname-role-appId2-corepurpose
-
-@allowed([
-  'Standard_LRS'
-  'Standard_ZRS'
-  'Standard_GRS'
-  'Standard_GZRS'
-  'Standard_RAGRS'
-  'Standard_RAGZRS'
-  'Premium_LRS'
-  'Premium_ZRS'
-])
-@description('The Storage Account tier')
-param accountTier string = 'Standard_LRS'
-
-@description('The Storage Account tier')
-param accessTier string = 'Hot'
-
 // param tags object = {
 //  owner: 'JM Family'
 //  environment: 'POC'
@@ -71,12 +48,50 @@ param appServicePlanId string = ''
 
 @description('The ID from Private Endpoint Subnet. If specified then the private endpoint will be created and associated to the Private Endpoint Subnet')
 param pvtEndpointSubnetId string = ''
+
+
+// Function App Parameters
+
+@description('The name of the function app that you wish to create.')
+param appName string = 'fnapp${uniqueString(resourceGroup().id)}'
+
+
+param functionAppName string = 'myFunctionApp'
+param functionAppLocation string = 'East US'
+param storageAccountName string = 'mystorageaccount'
+// param location string = resourceGroup().location
+
+/*
+// Storage Parameters
+@description('Globally unique name for the Storage Account')
+@minLength(3)
+@maxLength(24)
+param storageAccountName string = toLower('stg${bu}${environment}${appname}${role}${appId}')
+// storage-bu-environment-prodname-appname-role-appId2-corepurpose
+
+@allowed([
+  'Standard_LRS'
+  'Standard_ZRS'
+  'Standard_GRS'
+  'Standard_GZRS'
+  'Standard_RAGRS'
+  'Standard_RAGZRS'
+  'Premium_LRS'
+  'Premium_ZRS'
+])
+@description('The Storage Account tier')
+param accountTier string = 'Standard_LRS'
+
+@description('The Storage Account tier')
+param accessTier string = 'Hot'
+*/
 //*****************************************************************************************************
 
 
 // App Service
 //*****************************************************************************************************
- module appService 'br/ACR-LAB:bicep/patterns/appservice:v1.0.0' = {
+ // module appService 'br/ACR-LAB:bicep/patterns/appservice:v1.0.0' = {
+  module appService '../../../08-BICEP-ACR-PUBLISH/bicep-modules/modules/components/appservice/appservice.bicep' ={
   name: 'appServiceModule2'
   params: {
     appServiceAppName: appServiceAppName
@@ -93,6 +108,24 @@ param pvtEndpointSubnetId string = ''
 //*****************************************************************************************************
 
 
+// Function App
+//*****************************************************************************************************
+// module functionAppModule 'br/ACR-LAB:bicep/patterns/functionapp:v1.0.0'
+module functionAppModule '../../../08-BICEP-ACR-PUBLISH/bicep-modules/modules/components/functionapp/functionapp.bicep' = {
+  name: 'functionAppModule'
+  params: {
+    functionAppName: functionAppName
+    functionAppLocation: functionAppLocation
+    storageAccountName: storageAccountName
+    appServicePlanName: appServicePlanName
+  }
+}
+
+
+//*****************************************************************************************************
+
+
+/*
 // Storage Account
 //*****************************************************************************************************
 module storageAccountModule 'br/ACR-LAB:bicep/patterns/storage-account:v1.0.0' = {
@@ -107,9 +140,6 @@ module storageAccountModule 'br/ACR-LAB:bicep/patterns/storage-account:v1.0.0' =
   }
 }
 //*****************************************************************************************************
+*/
 
 
-// Function App
-//*****************************************************************************************************
-
-//*****************************************************************************************************
