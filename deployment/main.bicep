@@ -56,6 +56,7 @@ param pvtEndpointSubnetId string = ''
 // Function App Parameters
 // @description('The name of the function app that you wish to create.')
 param functionAppName string = toLower('fnapp-${bu}-${environment}-${appname}-${role}-${appId}')
+param funcAppServicePlanName string = toLower('func-appsvc-${bu}-${environment}-${appname}-${role}-${appId}')
 
 param funcStorageAccountName string = 'stgfunctionlab'
 
@@ -118,7 +119,7 @@ module functionAppModule 'br/ACR-LAB:bicep/patterns/functionapp:v1.0.0' = {
     functionAppName: functionAppName
     location: location
     workspaceId: workspaceId
-    appServicePlanName: appServicePlanName
+    appServicePlanName: funcAppServicePlanName
     appServicePlanSkuName: appServicePlanSkuName
     createNewAppServicePlan: createNewAppServicePlan
     appServicePlanId: appServicePlanId
