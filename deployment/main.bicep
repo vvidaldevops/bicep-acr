@@ -91,8 +91,8 @@ param accessTier string = 'Hot'
 
 // App Service
 //*****************************************************************************************************
- // module appService 'br/ACR-LAB:bicep/patterns/appservice:v1.0.0' = {
-  module appService '../../../01-COMPONENTS-and-PATTERNS/bicep-modules/modules/patterns/appservice/simple-appservice.bicep' = {
+module appService 'br/ACR-LAB:bicep/patterns/appservice:v1.0.0' = {
+ // module appService '../../../01-COMPONENTS-and-PATTERNS/bicep-modules/modules/patterns/appservice/simple-appservice.bicep' = {
   name: 'appServiceModule2'
   params: {
     appServiceAppName: appServiceAppName
@@ -111,8 +111,8 @@ param accessTier string = 'Hot'
 
 // Function App
 //*****************************************************************************************************
-// module functionAppModule 'br/ACR-LAB:bicep/patterns/functionapp:v1.0.0'
-module functionAppModule '../../../01-COMPONENTS-and-PATTERNS/bicep-modules/modules/patterns/functionapp/simple-functionapp.bicep' = {
+module functionAppModule 'br/ACR-LAB:bicep/patterns/functionapp:v1.0.0' = {
+// module functionAppModule '../../../01-COMPONENTS-and-PATTERNS/bicep-modules/modules/patterns/functionapp/simple-functionapp.bicep' = {
   name: 'functionAppModule'
   params: {
     functionAppName: functionAppName
