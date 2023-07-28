@@ -27,12 +27,8 @@ param workspaceId string ='/subscriptions/ea93148e-4b2f-4f06-b7fb-2c8ecc309d3f/r
 //  IAC: 'Bicep'
 //}
 
-// App Service Parameters
-@description('Globally unique name for the App Service')
-@maxLength(60)
-param appServiceAppName string = toLower('appsvc-${bu}-${environment}-${appname}-${role}-${appId}')
-// appsvc-bu-environment-prodname-appname-role-appId2-corepurpose
 
+// App Service Plan Parameters
 @maxLength(60)
 @description('The name of the App Service Plan.')
 param appServicePlanName string = toLower('appsvcplan-${bu}-${environment}-${appname}-${role}-${appId}')
@@ -46,20 +42,25 @@ param createNewAppServicePlan bool = true
 @description('If the above option is = true, the existing App Service Plan ID should be provided.')
 param appServicePlanId string = ''
 
+
+// App Service Parameters
+@description('Globally unique name for the App Service')
+@maxLength(60)
+param appServiceAppName string = toLower('appsvc-${bu}-${environment}-${appname}-${role}-${appId}')
+// appsvc-bu-environment-prodname-appname-role-appId2-corepurpose
+
 @description('The ID from Private Endpoint Subnet. If specified then the private endpoint will be created and associated to the Private Endpoint Subnet')
 param pvtEndpointSubnetId string = ''
 
 
 // Function App Parameters
+// @description('The name of the function app that you wish to create.')
+param functionAppName string = toLower('fnapp-${bu}-${environment}-${appname}-${role}-${appId}')
 
-@description('The name of the function app that you wish to create.')
-param appName string = 'fnapp${uniqueString(resourceGroup().id)}'
+param funcStorageAccountName string = 'stgfunctionlab'
 
-
-param functionAppName string = 'myFunctionApp'
-param functionAppLocation string = 'East US'
-param storageAccountName string = 'mystorageaccount'
-// param location string = resourceGroup().location
+param funcStorageAccountTier string = 'Standard_LRS'
+param funcStorageAccessTier string = 'Hot'
 
 /*
 // Storage Parameters
@@ -91,7 +92,7 @@ param accessTier string = 'Hot'
 // App Service
 //*****************************************************************************************************
  // module appService 'br/ACR-LAB:bicep/patterns/appservice:v1.0.0' = {
-  module appService '../../../08-BICEP-ACR-PUBLISH/bicep-modules/modules/components/appservice/appservice.bicep' ={
+  module appService '../../../01-COMPONENTS-and-PATTERNS/bicep-modules/modules/patterns/appservice/simple-appservice.bicep' = {
   name: 'appServiceModule2'
   params: {
     appServiceAppName: appServiceAppName
@@ -111,17 +112,23 @@ param accessTier string = 'Hot'
 // Function App
 //*****************************************************************************************************
 // module functionAppModule 'br/ACR-LAB:bicep/patterns/functionapp:v1.0.0'
-module functionAppModule '../../../08-BICEP-ACR-PUBLISH/bicep-modules/modules/components/functionapp/functionapp.bicep' = {
+module functionAppModule '../../../01-COMPONENTS-and-PATTERNS/bicep-modules/modules/patterns/functionapp/simple-functionapp.bicep' = {
   name: 'functionAppModule'
   params: {
     functionAppName: functionAppName
-    functionAppLocation: functionAppLocation
-    storageAccountName: storageAccountName
+    location: location
+    workspaceId: workspaceId
     appServicePlanName: appServicePlanName
+    appServicePlanSkuName: appServicePlanSkuName
+    createNewAppServicePlan: createNewAppServicePlan
+    appServicePlanId: appServicePlanId
+    funcStorageAccountName: funcStorageAccountName
+    funcStorageAccountTier: funcStorageAccountTier
+    funcStorageAccessTier: funcStorageAccessTier
+    pvtEndpointSubnetId: pvtEndpointSubnetId
+    // tags: tags
   }
 }
-
-
 //*****************************************************************************************************
 
 
