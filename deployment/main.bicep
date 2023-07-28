@@ -74,7 +74,7 @@ param appServicePlanId string = ''
   'dotnet'
   'java'
 ])
-param functionWorkerRuntime string
+param functionWorkerRuntime string = 'dotnet'
 
 @description('The Storage Account tier')
 param funcStorageAccountTier string = 'Standard_LRS'
