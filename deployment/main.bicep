@@ -1,5 +1,11 @@
 // Common Parameters
 //*****************************************************************************************************
+@description('The Azure region into which the resources should be deployed.')
+@allowed([
+  'eastus'
+])
+param location string = 'eastus'
+
 @allowed([ 'set', 'setf', 'jmf', 'jmfe' ])
 param bu string = 'jmf'
 
@@ -26,6 +32,8 @@ param tags object = {
 @description('The ID of Log Analytics Workspace.')
 param workspaceId string ='/subscriptions/ea93148e-4b2f-4f06-b7fb-2c8ecc309d3f/resourceGroups/RG-JMF-POC-2/providers/Microsoft.OperationalInsights/workspaces/workspace-lab-jmf-01'
 
+@description('The ID from Private Endpoint Subnet. If specified then the private endpoint will be created and associated to the Private Endpoint Subnet')
+param pvtEndpointSubnetId string = ''
 //*****************************************************************************************************
 
 // App Service Plan Parameters
@@ -42,6 +50,7 @@ param createNewAppServicePlan bool = true
 
 @description('If the above option is = true, the existing App Service Plan ID should be provided.')
 param appServicePlanId string = ''
+
 //*****************************************************************************************************
 
 // App Service Parameters
@@ -50,9 +59,6 @@ param appServicePlanId string = ''
 // @maxLength(60)
 // param appServiceAppName string = toLower('appsvc-${bu}-${environment}-${appname}-${role}-${appId}')
 // appsvc-bu-environment-prodname-appname-role-appId2-corepurpose
-
-@description('The ID from Private Endpoint Subnet. If specified then the private endpoint will be created and associated to the Private Endpoint Subnet')
-param pvtEndpointSubnetId string = ''
 //*****************************************************************************************************
 
 // Function App Parameters
@@ -62,7 +68,18 @@ param pvtEndpointSubnetId string = ''
 // param funcAppServicePlanName string = toLower('func-appsvc-${bu}-${environment}-${appname}-${role}-${appId}')
 // param funcStorageAccountName string = 'stgfunctionlab'
 
+@description('The language worker runtime to load in the function app.')
+@allowed([
+  'node'
+  'dotnet'
+  'java'
+])
+param functionWorkerRuntime string
+
+@description('The Storage Account tier')
 param funcStorageAccountTier string = 'Standard_LRS'
+
+@description('The Storage Account tier')
 param funcStorageAccessTier string = 'Hot'
 //*****************************************************************************************************
 
@@ -93,7 +110,7 @@ param accessTier string = 'Hot'
 */
 //*****************************************************************************************************
 
-
+/*
 // App Service
 //*****************************************************************************************************
 module appService 'br/ACR-LAB:bicep/patterns/appservice:v1.0.0' = {
@@ -106,7 +123,7 @@ module appService 'br/ACR-LAB:bicep/patterns/appservice:v1.0.0' = {
     appId: appId
     appname: appname
     // appServiceAppName: appServiceAppName
-    // ocation: location
+    location: location
     workspaceId: workspaceId
     // appServicePlanName: appServicePlanName
     appServicePlanSkuName: appServicePlanSkuName
@@ -117,7 +134,7 @@ module appService 'br/ACR-LAB:bicep/patterns/appservice:v1.0.0' = {
   }
 }
 //*****************************************************************************************************
-
+*/
 
 // Function App
 //*****************************************************************************************************
@@ -131,9 +148,10 @@ module functionAppModule 'br/ACR-LAB:bicep/patterns/functionapp:v1.0.0' = {
     appId: appId
     appname: appname
     // functionAppName: functionAppName
-    // location: location
+    location: location
     workspaceId: workspaceId
     // appServicePlanName: funcAppServicePlanName
+    functionWorkerRuntime: functionWorkerRuntime
     appServicePlanSkuName: appServicePlanSkuName
     createNewAppServicePlan: createNewAppServicePlan
     appServicePlanId: appServicePlanId
@@ -146,9 +164,8 @@ module functionAppModule 'br/ACR-LAB:bicep/patterns/functionapp:v1.0.0' = {
 }
 //*****************************************************************************************************
 
-
 /*
-// Storage Account
+// Storage Account for Data
 //*****************************************************************************************************
 module storageAccountModule 'br/ACR-LAB:bicep/patterns/storage-account:v1.0.0' = {
   name: 'storageAccountModule2'
