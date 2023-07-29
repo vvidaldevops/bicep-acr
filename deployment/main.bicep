@@ -164,7 +164,7 @@ module functionAppModule 'br/ACR-LAB:bicep/patterns/functionapp:v1.0.0' = {
 }
 //*****************************************************************************************************
 
-/*
+/**
 // Storage Account for Data
 //*****************************************************************************************************
 module storageAccountModule 'br/ACR-LAB:bicep/patterns/storage-account:v1.0.0' = {
