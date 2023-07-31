@@ -38,24 +38,14 @@ param pvtEndpointSubnetId string = ''
 
 // App Service Plan Parameters
 //*****************************************************************************************************
-@allowed([
-  'new'
-  'existing'
-])
-param newOrExistingAppServicePlan string = 'new'
+@description('Indicates whether AppServicePlan should be created or using an existing one.')
+param createNewAppServicePlan bool = true
 
-@description('The name of the App Service plan (When existing was selected.')
-param existingAppServicePlanName string = ''
+@description('If the above option is = true, the existing App Service Plan ID should be provided.')
+param existingappServicePlanId string = ''
 
 @description('The name of the App Service plan SKU.')
 param appServicePlanSkuName string = 'B1'
-
-// @description('Indicates whether AppServicePlan should be created or using an existing one.')
-// param createNewAppServicePlan bool = true
-
-// @description('If the above option is = true, the existing App Service Plan ID should be provided.')
-// param appServicePlanId string = ''
-
 //*****************************************************************************************************
 
 // App Service Parameters
@@ -65,14 +55,11 @@ param appServicePlanSkuName string = 'B1'
 
 // Function App Parameters
 //*****************************************************************************************************
-@allowed([
-  'new'
-  'existing'
-])
-param newOrExistingFuncAppServicePlan string = 'new'
+@description('Indicates whether AppServicePlan should be created or using an existing one.')
+param createNewFcnServicePlan bool = true
 
-@description('The name of the App Service plan (When existing was selected.')
-param existingfuncAppServicePlanName string
+@description('If the above option is = true, the existing App Service Plan ID should be provided.')
+param existingFcnServicePlanId string = ''
 
 @description('The language worker runtime to load in the function app.')
 @allowed([
@@ -119,11 +106,9 @@ module appService '../../../01-COMPONENTS-and-PATTERNS/bicep-modules/modules/pat
     appname: appname
     location: location
     workspaceId: workspaceId
-    newOrExistingAppServicePlan: newOrExistingAppServicePlan
-    existingAppServicePlanName: existingAppServicePlanName
     appServicePlanSkuName: appServicePlanSkuName
-    // createNewAppServicePlan: createNewAppServicePlan
-    // appServicePlanId: appServicePlanId
+    createNewAppServicePlan: createNewAppServicePlan
+    existingappServicePlanId: existingappServicePlanId
     pvtEndpointSubnetId: pvtEndpointSubnetId
     tags: tags
   }
@@ -144,12 +129,12 @@ module functionAppModule '../../../01-COMPONENTS-and-PATTERNS/bicep-modules/modu
     appname: appname
     location: location
     workspaceId: workspaceId
-    newOrExistingFuncAppServicePlan: newOrExistingFuncAppServicePlan
-    existingfuncAppServicePlanName: existingfuncAppServicePlanName
+    // newOrExistingFuncAppServicePlan: newOrExistingFuncAppServicePlan
+    // existingfuncAppServicePlanName: existingfuncAppServicePlanName
     functionWorkerRuntime: functionWorkerRuntime
     appServicePlanSkuName: appServicePlanSkuName
-    // createNewAppServicePlan: createNewAppServicePlan
-    // appServicePlanId: appServicePlanId
+    createNewFcnServicePlan: createNewFcnServicePlan
+    existingFcnServicePlanId: existingFcnServicePlanId
     funcStorageAccountTier: funcStorageAccountTier
     pvtEndpointSubnetId: pvtEndpointSubnetId
     tags: tags
