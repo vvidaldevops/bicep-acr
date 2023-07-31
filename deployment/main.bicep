@@ -38,35 +38,41 @@ param pvtEndpointSubnetId string = ''
 
 // App Service Plan Parameters
 //*****************************************************************************************************
-// @maxLength(60)
-// @description('The name of the App Service Plan.')
-// param appServicePlanName string = toLower('appsvcplan-${bu}-${environment}-${appname}-${role}-${appId}')
+@allowed([
+  'new'
+  'existing'
+])
+param newOrExistingAppServicePlan string = 'new'
+
+@description('The name of the App Service plan (When existing was selected.')
+param existingAppServicePlanName string = ''
 
 @description('The name of the App Service plan SKU.')
 param appServicePlanSkuName string = 'B1'
 
-@description('Indicates whether AppServicePlan should be created or using an existing one.')
-param createNewAppServicePlan bool = true
+// @description('Indicates whether AppServicePlan should be created or using an existing one.')
+// param createNewAppServicePlan bool = true
 
-@description('If the above option is = true, the existing App Service Plan ID should be provided.')
-param appServicePlanId string = ''
+// @description('If the above option is = true, the existing App Service Plan ID should be provided.')
+// param appServicePlanId string = ''
 
 //*****************************************************************************************************
 
 // App Service Parameters
 //*****************************************************************************************************
-// @description('Globally unique name for the App Service')
-// @maxLength(60)
-// param appServiceAppName string = toLower('appsvc-${bu}-${environment}-${appname}-${role}-${appId}')
 // appsvc-bu-environment-prodname-appname-role-appId2-corepurpose
 //*****************************************************************************************************
 
 // Function App Parameters
 //*****************************************************************************************************
-// @description('The name of the function app that you wish to create.')
-// param functionAppName string = toLower('fnapp-${bu}-${environment}-${appname}-${role}-${appId}')
-// param funcAppServicePlanName string = toLower('func-appsvc-${bu}-${environment}-${appname}-${role}-${appId}')
-// param funcStorageAccountName string = 'stgfunctionlab'
+@allowed([
+  'new'
+  'existing'
+])
+param newOrExistingFuncAppServicePlan string = 'new'
+
+@description('The name of the App Service plan (When existing was selected.')
+param existingfuncAppServicePlanName string
 
 @description('The language worker runtime to load in the function app.')
 @allowed([
@@ -78,20 +84,11 @@ param functionWorkerRuntime string = 'node'
 
 @description('The Storage Account tier')
 param funcStorageAccountTier string = 'Standard_LRS'
-
-@description('The Storage Account tier')
-param funcStorageAccessTier string = 'Hot'
 //*****************************************************************************************************
 
-/*
-// Storage Parameters
+// Storage Account Parameters
 //*****************************************************************************************************
-@description('Globally unique name for the Storage Account')
-@minLength(3)
-@maxLength(24)
-param storageAccountName string = toLower('stg${bu}${environment}${appname}${role}${appId}')
-// storage-bu-environment-prodname-appname-role-appId2-corepurpose
-
+@description('Storage Account type')
 @allowed([
   'Standard_LRS'
   'Standard_ZRS'
@@ -102,19 +99,17 @@ param storageAccountName string = toLower('stg${bu}${environment}${appname}${rol
   'Premium_LRS'
   'Premium_ZRS'
 ])
-@description('The Storage Account tier')
 param accountTier string = 'Standard_LRS'
 
-@description('The Storage Account tier')
+@description('The Storage Account access tier')
 param accessTier string = 'Hot'
-*/
 //*****************************************************************************************************
 
-/*
+
 // App Service
 //*****************************************************************************************************
-module appService 'br/ACR-LAB:bicep/patterns/appservice:v1.0.0' = {
- // module appService '../../../01-COMPONENTS-and-PATTERNS/bicep-modules/modules/patterns/appservice/simple-appservice.bicep' = {
+// module appService 'br/ACR-LAB:bicep/patterns/appservice:v1.0.0' = {
+module appService '../../../01-COMPONENTS-and-PATTERNS/bicep-modules/modules/patterns/appservice/simple-appservice.bicep' = {
   name: 'appServiceModule2'
   params: {
     bu: bu
@@ -122,24 +117,24 @@ module appService 'br/ACR-LAB:bicep/patterns/appservice:v1.0.0' = {
     role: role
     appId: appId
     appname: appname
-    // appServiceAppName: appServiceAppName
     location: location
     workspaceId: workspaceId
-    // appServicePlanName: appServicePlanName
+    newOrExistingAppServicePlan: newOrExistingAppServicePlan
+    existingAppServicePlanName: existingAppServicePlanName
     appServicePlanSkuName: appServicePlanSkuName
-    createNewAppServicePlan: createNewAppServicePlan
-    appServicePlanId: appServicePlanId
+    // createNewAppServicePlan: createNewAppServicePlan
+    // appServicePlanId: appServicePlanId
     pvtEndpointSubnetId: pvtEndpointSubnetId
     tags: tags
   }
 }
 //*****************************************************************************************************
-*/
+
 
 // Function App
 //*****************************************************************************************************
-module functionAppModule 'br/ACR-LAB:bicep/patterns/functionapp:v1.0.0' = {
-// module functionAppModule '../../../01-COMPONENTS-and-PATTERNS/bicep-modules/modules/patterns/functionapp/simple-functionapp.bicep' = {
+// module functionAppModule 'br/ACR-LAB:bicep/patterns/functionapp:v1.0.0' = {
+module functionAppModule '../../../01-COMPONENTS-and-PATTERNS/bicep-modules/modules/patterns/functionapp/simple-functionapp.bicep' = {
   name: 'functionAppModule2'
   params: {
     bu: bu
@@ -147,30 +142,33 @@ module functionAppModule 'br/ACR-LAB:bicep/patterns/functionapp:v1.0.0' = {
     role: role
     appId: appId
     appname: appname
-    // functionAppName: functionAppName
     location: location
     workspaceId: workspaceId
-    // appServicePlanName: funcAppServicePlanName
+    newOrExistingFuncAppServicePlan: newOrExistingFuncAppServicePlan
+    existingfuncAppServicePlanName: existingfuncAppServicePlanName
     functionWorkerRuntime: functionWorkerRuntime
     appServicePlanSkuName: appServicePlanSkuName
-    createNewAppServicePlan: createNewAppServicePlan
-    appServicePlanId: appServicePlanId
-    // funcStorageAccountName: funcStorageAccountName
+    // createNewAppServicePlan: createNewAppServicePlan
+    // appServicePlanId: appServicePlanId
     funcStorageAccountTier: funcStorageAccountTier
-    funcStorageAccessTier: funcStorageAccessTier
     pvtEndpointSubnetId: pvtEndpointSubnetId
     tags: tags
   }
 }
 //*****************************************************************************************************
 
-/**
+
 // Storage Account for Data
 //*****************************************************************************************************
-module storageAccountModule 'br/ACR-LAB:bicep/patterns/storage-account:v1.0.0' = {
+// module storageAccountModule 'br/ACR-LAB:bicep/patterns/storage-account:v1.0.0' = {
+module storageAccountModule '../../../01-COMPONENTS-and-PATTERNS/bicep-modules/modules/patterns/storage-account/simple-storage.bicep' = {  
   name: 'storageAccountModule2'
   params: {
-    storageAccountName: storageAccountName
+    bu: bu
+    stage: stage
+    role: role
+    appId: appId
+    appname: appname
     location: location
     accountTier: accountTier
     accessTier: accessTier
@@ -179,6 +177,3 @@ module storageAccountModule 'br/ACR-LAB:bicep/patterns/storage-account:v1.0.0' =
   }
 }
 //*****************************************************************************************************
-*/
-
-
