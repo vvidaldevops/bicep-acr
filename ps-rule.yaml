@@ -24,8 +24,8 @@ input:
 
 #    #Include test files from modules
     #- '!**/*.bicep'
-    - '!**/*.bicep' 
-    - "!**/.bicepparam"
+    #- '!**/*.bicep' 
+    #- "!**/.bicepparam"
 
 #execution:
   # Disable warnings that files cannot be processed
