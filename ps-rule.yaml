@@ -18,7 +18,8 @@ input:
   pathIgnore:
     - "*.yml"
     - "*.md"
-#    - "*.github/"
+    - "samples/"
+
 #    #Include test files from modules
     - '!**/*.bicep'
     - '!deployment/*.bicep'  

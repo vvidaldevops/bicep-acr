@@ -13,7 +13,13 @@ jobs:
     steps:
       # Checkout code
     - uses: actions/checkout@v2
-
+      
+      # Log into Azure
+    - name: Login to Azure  
+      uses: azure/login@v1.4.3
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+      
     - name: Run PSRule analysis
       uses: microsoft/ps-rule@v2.9.0
       with:
@@ -21,14 +27,7 @@ jobs:
         modules: 'PSRule.Rules.Azure'
         #inputPath: deployment/
         #source: deployment  
-                    
-      # Log into Azure
-    - name: Login to Azure  
-      uses: azure/login@v1.4.3
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-  
-    
+      
 #    - name: Preview Changes from Bicep
 #      uses: Azure/deployment-what-if-action@v1.0.0
 #      with:
