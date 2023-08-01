@@ -23,16 +23,16 @@ input:
     - '!**/*.bicep'
     - '!deployment/*.bicep'  
 
-input:
-  pathIgnore:
+#input:
+#  pathIgnore:
   # Exclude bicepconfig.json
   #- 'bicepconfig.json'
   # Exclude module files
-  - 'modules/**/*.bicep'
-  - '../deployment/*.parameters.bicepparam'
+  #- 'modules/**/*.bicep'
+  #- '../deployment/*.parameters.bicepparam'
   # Include test files from modules
-  - '!deployment/*.tests.bicep'
-  - '!deployment/*.main.bicep'
+  #- '!deployment/*.tests.bicep'
+  #- '!deployment/*.main.bicep'
 
 
 execution:
