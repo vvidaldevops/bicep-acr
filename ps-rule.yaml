@@ -23,9 +23,8 @@ input:
     - 'metadata.json'
 
 #    #Include test files from modules
-    #- '!**/*.bicep'
     #- '!**/*.bicep' 
-    #- "!**/.bicepparam"
+    - "!**/.bicepparam"
 
 #execution:
   # Disable warnings that files cannot be processed
