@@ -28,7 +28,7 @@ jobs:
         modules: 'PSRule.Rules.Azure'
         #outputFormat: Sarif
         #outputPath: reports/ps-rule-results.sarif
-        #inputPath: 'deployment/'
+        inputPath: 'deployment/'
         #source: '.'
         #env:
           # Define environment variables using GitHub encrypted secrets
