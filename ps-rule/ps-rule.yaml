@@ -8,13 +8,17 @@ configuration:
   #PSRULE_AZURE_BICEP_PATH: "%USERPROFILE%\\.bicep\\"
   AZURE_BICEP_PARAMS_FILE_EXPANSION: false
   AZURE_PARAMETER_FILE_EXPANSION: false
+
+execution:
+  notProcessedWarning: false
+
 input:
   pathIgnore:
     - "*.yml"
     - "*.md"
     - "*.github/"
     # Include test files from modules
-    - '!deployment/*.bicep'
+    # - '!deployment/*.bicep'
    
 output:
   as: Summary
