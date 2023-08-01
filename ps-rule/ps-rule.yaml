@@ -5,15 +5,14 @@ include:
 configuration:
   AZURE_BICEP_FILE_EXPANSION: true
   AZURE_BICEP_CHECK_TOOL: true
-  PSRULE_AZURE_BICEP_PATH: "%USERPROFILE%\\.bicep\\"
-  AZURE_BICEP_PARAMS_FILE_EXPANSION: true
-  AZURE_PARAMETER_FILE_EXPANSION: true
+  #PSRULE_AZURE_BICEP_PATH: "%USERPROFILE%\\.bicep\\"
+  AZURE_BICEP_PARAMS_FILE_EXPANSION: false
+  AZURE_PARAMETER_FILE_EXPANSION: false
 input:
   pathIgnore:
     - "*.yml"
     - "*.md"
     - "*.github/"
-
     # Include test files from modules
     - '!deployment/*.bicep'
    
