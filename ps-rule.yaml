@@ -22,11 +22,11 @@ input:
 
 #    #Include test files from modules
     #- '!**/*.bicep'
-    - '!deployment/*.bicep'  
+    - '../!deployment/*.bicep'  
 
-execution:
+#execution:
   # Disable warnings that files cannot be processed
-  notProcessedWarning: false
+  #notProcessedWarning: false
 
 output:
   as: Summary

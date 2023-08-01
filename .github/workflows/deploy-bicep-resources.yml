@@ -25,8 +25,8 @@ jobs:
       with:
         version: '1.11.1'
         modules: 'PSRule.Rules.Azure'
-        inputPath: deployment/
-        #source: deployment  
+        inputPath: 'deployment/'
+        source: '.'  
       
 #    - name: Preview Changes from Bicep
 #      uses: Azure/deployment-what-if-action@v1.0.0
