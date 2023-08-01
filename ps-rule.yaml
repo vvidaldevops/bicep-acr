@@ -14,21 +14,33 @@ configuration:
   #AZURE_BICEP_PARAMS_FILE_EXPANSION: false
   #AZURE_PARAMETER_FILE_EXPANSION: false
 
+#input:
+#  pathIgnore:
+#    - "*.yml"
+#    - "*.md"
+#    - "*.github/"
+#    #Include test files from modules
+#    - '!**/*.bicep'
+#    - '!deployment/*.bicep'  
+
 input:
   pathIgnore:
-    - "*.yml"
-    - "*.md"
-    - "*.github/"
-    #Include test files from modules
-    - '!**/*.bicep'
-    - '!deployment/*.bicep'  
+  # Exclude bicepconfig.json
+  #- 'bicepconfig.json'
+  # Exclude module files
+  - 'modules/**/*.bicep'
+  - '../deployment/*.parameters.bicepparam'
+  # Include test files from modules
+  - '!deployment/*.tests.bicep'
+  - '!deployment/*.main.bicep'
+
 
 execution:
   # Disable warnings that files cannot be processed
   notProcessedWarning: false
 
 output:
-  #as: Summary
+  as: Summary
   #culture: [ 'en-US' ]
   # Show results for rules with the Fail, Pass, or Error outcome
-  outcome: 'Processed'
+  #outcome: 'Processed'
