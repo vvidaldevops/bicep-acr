@@ -21,13 +21,13 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
       
     - name: Run PSRule analysis
-      continue-on-error: true
+      #continue-on-error: true
       uses: microsoft/ps-rule@v2.9.0
       with:
         version: '1.11.1'
         modules: 'PSRule.Rules.Azure'
-        outputFormat: Sarif
-        outputPath: reports/ps-rule-results.sarif
+        #outputFormat: Sarif
+        #outputPath: reports/ps-rule-results.sarif
         #inputPath: 'deployment/'
         #source: '.'
         #env:
@@ -36,10 +36,11 @@ jobs:
           # AZURE_CLIENT_SECRET: ${{ secrets.BICEP_REGISTRY_CLIENTSECRET }}
           # AZURE_TENANT_ID: ${{ secrets.BICEP_REGISTRY_TENANTID }}  
        
-    - name: Upload results to security tab
-      uses: github/codeql-action/upload-sarif@v2
-      with:
-        sarif_file: reports/ps-rule-results.sarif
+    #- name: Upload results to security tab
+    #  uses: github/codeql-action/upload-sarif@v2
+    #  with:
+    #    sarif_file: reports/ps-rule-results.sarif
+    #    category: PSRule
 
   Preview-Bicep-Changes:
     needs: [PSRule-Analysis]
