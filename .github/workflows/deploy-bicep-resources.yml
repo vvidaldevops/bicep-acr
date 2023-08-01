@@ -21,6 +21,7 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
       
     - name: Run PSRule analysis
+      if: success() || failure()
       uses: microsoft/ps-rule@v2.9.0
       with:
         version: '1.11.1'
