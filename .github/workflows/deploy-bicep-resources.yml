@@ -25,7 +25,7 @@ jobs:
       with:
         version: '1.11.1'
         modules: 'PSRule.Rules.Azure'
-        #inputPath: deployment/
+        inputPath: deployment/
         #source: deployment  
       
 #    - name: Preview Changes from Bicep
