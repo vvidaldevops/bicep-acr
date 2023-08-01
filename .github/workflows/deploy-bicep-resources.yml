@@ -26,7 +26,12 @@ jobs:
         version: '1.11.1'
         modules: 'PSRule.Rules.Azure'
         inputPath: 'deployment/'
-        source: '.'  
+        source: '.'
+        env:
+          # Define environment variables using GitHub encrypted secrets
+          # AZURE_CLIENT_ID: ${{ secrets.BICEP_REGISTRY_CLIENTID }}
+          # AZURE_CLIENT_SECRET: ${{ secrets.BICEP_REGISTRY_CLIENTSECRET }}
+          # AZURE_TENANT_ID: ${{ secrets.BICEP_REGISTRY_TENANTID }}  
       
 #    - name: Preview Changes from Bicep
 #      uses: Azure/deployment-what-if-action@v1.0.0
