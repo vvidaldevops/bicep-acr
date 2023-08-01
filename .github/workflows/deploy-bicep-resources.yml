@@ -35,6 +35,11 @@ jobs:
           # AZURE_CLIENT_SECRET: ${{ secrets.BICEP_REGISTRY_CLIENTSECRET }}
           # AZURE_TENANT_ID: ${{ secrets.BICEP_REGISTRY_TENANTID }}  
        
+    - name: Upload results to security tab
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+        sarif_file: reports/ps-rule-results.sarif
+
   Preview-Bicep-Changes:
     needs: [PSRule-Analysis]
     runs-on: ubuntu-latest

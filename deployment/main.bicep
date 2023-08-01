@@ -4,69 +4,63 @@
 @allowed([
   'eastus'
 ])
-param location string = 'eastus'
+param location string
 
 @allowed([ 'set', 'setf', 'jmf', 'jmfe' ])
-param bu string = 'jmf'
+param bu string
 
 @allowed([ 'poc', 'dev', 'qa', 'uat', 'prd' ])
-param stage string = 'poc'
+param stage string
 
 @maxLength(6)
-param role string = 'automa'
+param role string
 
 @maxLength(2)
-param appId string = '01'
+param appId string
 
 @maxLength(6)
-param appname string = 'app123'
+param appname string
 
-param tags object = {
-  owner: 'JM Family'
-  environment: 'POC'
-  department: 'IT'
-  project: 'POC Project'
-  IAC: 'Bicep'
-}
+param tags object
 
 @description('The ID of Log Analytics Workspace.')
-param workspaceId string ='/subscriptions/ea93148e-4b2f-4f06-b7fb-2c8ecc309d3f/resourceGroups/RG-JMF-POC-2/providers/Microsoft.OperationalInsights/workspaces/workspace-lab-jmf-01'
+param workspaceId string
 
 @description('The ID from Private Endpoint Subnet. If specified then the private endpoint will be created and associated to the Private Endpoint Subnet')
-param pvtEndpointSubnetId string = ''
+param pvtEndpointSubnetId string
 //*****************************************************************************************************
 
 // App Service Plan Parameters
 //*****************************************************************************************************
 @description('Indicates whether AppServicePlan should be created or using an existing one.')
-param createNewAppServicePlan bool = true
+param createNewAppServicePlan bool
 
 @description('If the above option is = true, the existing App Service Plan ID should be provided.')
-param existingappServicePlanId string = ''
+param existingappServicePlanId string
 
 @description('The name of the App Service plan SKU.')
-param appServicePlanSkuName string = 'S1'
+param appServicePlanSkuName string
 
 @description('The kind of the App Service plan.')
-param appServicePlanKind string = 'windows'
+param appServicePlanKind string
 
 @description('The tier of the App Service plan.')
-param appServicePlanTier string = 'Standard'
+param appServicePlanTier string
 //*****************************************************************************************************
 
 // App Service Parameters
 //*****************************************************************************************************
-param appServiceEndpointVnetName string = 'vnet-jmf-poc'
-param appServiceEndpointSubnetName string = 'App1Subnet'
+param appServiceEndpointVnetName string
+param appServiceEndpointSubnetName string
 //*****************************************************************************************************
 
 // Function App Parameters
 //*****************************************************************************************************
 @description('Indicates whether AppServicePlan should be created or using an existing one.')
-param createNewFcnServicePlan bool = true
+param createNewFcnServicePlan bool
 
 @description('If the above option is = true, the existing App Service Plan ID should be provided.')
-param existingFcnServicePlanId string = ''
+param existingFcnServicePlanId string
 
 @description('The language worker runtime to load in the function app.')
 @allowed([
@@ -74,22 +68,22 @@ param existingFcnServicePlanId string = ''
   'dotnet'
   'java'
 ])
-param functionWorkerRuntime string = 'node'
+param functionWorkerRuntime string
 
 @description('The Storage Account tier')
-param funcStorageAccountTier string = 'Standard_LRS'
+param funcStorageAccountTier string
 
 @description('The name from Function Service Endpoint VNET.')
-param funcServiceEndpointVnetName string = 'vnet-jmf-poc'
+param funcServiceEndpointVnetName string
 
 @description('The name from Function Service Endpoint Subnet.')
-param funcServiceEndpointSubnetName string = 'App1Subnet'
+param funcServiceEndpointSubnetName string
 
 @description('The name from Function Storage Service Endpoint VNET.')
-param funcStgServiceEndpointvNetName string = 'vnet-jmf-poc'
+param funcStgServiceEndpointvNetName string
 
 @description('The name from Function Storage Service Endpoint Subnet.')
-param funcStgServiceEndpointSubnetName string = 'StorageSubnet'
+param funcStgServiceEndpointSubnetName string
 //*****************************************************************************************************
 
 // Storage Account Parameters
@@ -105,19 +99,19 @@ param funcStgServiceEndpointSubnetName string = 'StorageSubnet'
   'Premium_LRS'
   'Premium_ZRS'
 ])
-param accountTier string = 'Standard_LRS'
+param accountTier string
 
 @description('Allow or Deny the storage public access. Default is Deny')
-param allowBlobPublicAccess string = 'Deny'
+param allowBlobPublicAccess string
 
 @description('The name from Service Endpoint VNET.')
-param stgServiceEndpointVnetName string = 'vnet-jmf-poc'
+param stgServiceEndpointVnetName string
 
 @description('The name from Service Endpoint Subnet.')
-param stgServiceEndpointSubnetName string = 'StorageSubnet'
+param stgServiceEndpointSubnetName string
 
 @description('The Storage Account access tier')
-param accessTier string = 'Hot'
+param accessTier string
 //*****************************************************************************************************
 
 
