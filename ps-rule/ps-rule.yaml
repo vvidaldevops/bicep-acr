@@ -10,12 +10,13 @@ configuration:
   AZURE_PARAMETER_FILE_EXPANSION: true
 input:
   pathIgnore:
-    # Include test files from modules
-    - '!deployment/*.bicep'
-    - "!*.json"
-    - "!*.yaml"
     - "*.yml"
     - "*.md"
+    - "*.github/"
+
+    # Include test files from modules
+    - '!deployment/*.bicep'
+   
 output:
   as: Summary
   culture: [ 'en-US' ]
