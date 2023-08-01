@@ -56,8 +56,8 @@ param appServicePlanTier string = 'Standard'
 
 // App Service Parameters
 //*****************************************************************************************************
-// param appServiceEndpointVnetName string = 'vnet-jmf-poc'
-// param appServiceEndpointSubnetName string = 'App1Subnet'
+param appServiceEndpointVnetName string = 'vnet-jmf-poc'
+param appServiceEndpointSubnetName string = 'App1Subnet'
 //*****************************************************************************************************
 
 // Function App Parameters
@@ -123,8 +123,8 @@ param accessTier string = 'Hot'
 
 // App Service
 //*****************************************************************************************************
-// module appService 'br/ACR-LAB:bicep/patterns/appservice:v1.0.0' = {
-module appService '../../../01-COMPONENTS-and-PATTERNS/bicep-modules/modules/patterns/appservice/simple-appservice.bicep' = {
+module appService 'br/ACR-LAB:bicep/patterns/appservice:v1.0.0' = {
+//module appService '../../../01-COMPONENTS-and-PATTERNS/bicep-modules/modules/patterns/appservice/simple-appservice.bicep' = {
   name: 'appServiceModule2'
   params: {
     bu: bu
@@ -137,8 +137,8 @@ module appService '../../../01-COMPONENTS-and-PATTERNS/bicep-modules/modules/pat
     appServicePlanSkuName: appServicePlanSkuName
     appServicePlanKind: appServicePlanKind
     appServicePlanTier: appServicePlanTier
-    // appServiceEndpointVnetName: appServiceEndpointVnetName
-    // appServiceEndpointSubnetName: appServiceEndpointSubnetName
+    appServiceEndpointVnetName: appServiceEndpointVnetName
+     appServiceEndpointSubnetName: appServiceEndpointSubnetName
     createNewAppServicePlan: createNewAppServicePlan
     existingappServicePlanId: existingappServicePlanId
     pvtEndpointSubnetId: pvtEndpointSubnetId
@@ -150,8 +150,8 @@ module appService '../../../01-COMPONENTS-and-PATTERNS/bicep-modules/modules/pat
 
 // Function App
 //*****************************************************************************************************
-// module functionAppModule 'br/ACR-LAB:bicep/patterns/functionapp:v1.0.0' = {
-module functionAppModule '../../../01-COMPONENTS-and-PATTERNS/bicep-modules/modules/patterns/functionapp/simple-functionapp.bicep' = {
+module functionAppModule 'br/ACR-LAB:bicep/patterns/functionapp:v1.0.0' = {
+//module functionAppModule '../../../01-COMPONENTS-and-PATTERNS/bicep-modules/modules/patterns/functionapp/simple-functionapp.bicep' = {
   name: 'functionAppModule2'
   params: {
     bu: bu
@@ -179,8 +179,8 @@ module functionAppModule '../../../01-COMPONENTS-and-PATTERNS/bicep-modules/modu
 
 // Storage Account for Data
 //*****************************************************************************************************
-// module storageAccountModule 'br/ACR-LAB:bicep/patterns/storage-account:v1.0.0' = {
-module storageAccountModule '../../../01-COMPONENTS-and-PATTERNS/bicep-modules/modules/patterns/storage-account/simple-storage.bicep' = {  
+module storageAccountModule 'br/ACR-LAB:bicep/patterns/storage-account:v1.0.0' = {
+//module storageAccountModule '../../../01-COMPONENTS-and-PATTERNS/bicep-modules/modules/patterns/storage-account/simple-storage.bicep' = {  
   name: 'storageAccountModule2'
   params: {
     bu: bu

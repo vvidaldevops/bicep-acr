@@ -22,14 +22,14 @@ param existingappServicePlanId = ''
 param appServicePlanSkuName = 'B1'
 param appServicePlanKind = ''
 param appServicePlanTier = ''
-param appServiceEndpointSubnetName = 'vnet-jmf-poc'
+//param appServiceEndpointSubnetName = 'vnet-jmf-poc'
 param createNewFcnServicePlan = true
 param existingFcnServicePlanId = ''
 param functionWorkerRuntime = 'node'
 param funcStorageAccountTier = 'Standard_LRS'
 param funcServiceEndpointSubnetName = 'App1Subnet'
 param accountTier = 'Standard_LRS'
-param allowBlobPublicAccess = false
+param allowBlobPublicAccess = 'Deny'
 param stgServiceEndpointSubnetName = 'StorageSubnet'
 param accessTier = 'Hot'
 
