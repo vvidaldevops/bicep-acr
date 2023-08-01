@@ -7,13 +7,13 @@ on:
   workflow_dispatch:
 
 jobs:
-  Preview-Bicep-Changes:
+  PSRule-Analysis:
     runs-on: ubuntu-latest
 
     steps:
       # Checkout code
     - uses: actions/checkout@v2
-      
+                    
       # Log into Azure
     - name: Login to Azure  
       uses: azure/login@v1.4.3
@@ -27,49 +27,53 @@ jobs:
         modules: 'PSRule.Rules.Azure'
         inputPath: 'deployment/'
         source: '.'
-        env:
+        #env:
           # Define environment variables using GitHub encrypted secrets
           # AZURE_CLIENT_ID: ${{ secrets.BICEP_REGISTRY_CLIENTID }}
           # AZURE_CLIENT_SECRET: ${{ secrets.BICEP_REGISTRY_CLIENTSECRET }}
           # AZURE_TENANT_ID: ${{ secrets.BICEP_REGISTRY_TENANTID }}  
-      
-#    - name: Preview Changes from Bicep
-#      uses: Azure/deployment-what-if-action@v1.0.0
-#      with:
-#        subscription: ${{ secrets.AZURE_SUBSCRIPTION }} 
-#        resourceGroup: ${{ secrets.AZURE_RG }} 
-#        templateFile: deployment/main.bicep
+       
+  Preview-Bicep-Changes:
+    needs: [PSRule-Analysis]
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout code
+    - uses: actions/checkout@v2
+                    
+      # Log into Azure
+    - name: Login to Azure  
+      uses: azure/login@v1.4.3
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+  
+    - name: Preview Changes from Bicep
+      uses: Azure/deployment-what-if-action@v1.0.0
+      with:
+        subscription: ${{ secrets.AZURE_SUBSCRIPTION }} 
+        resourceGroup: ${{ secrets.AZURE_RG }} 
+        templateFile: deployment/main.bicep
         
-#  Deploy-Azure-from-ACR:
-#    environment: Deployment-POC
-#    needs: [Preview-Bicep-Changes]
-#    runs-on: ubuntu-latest
+  Deploy-Azure-from-ACR:
+    environment: Deployment-POC
+    needs: [Preview-Bicep-Changes]
+    runs-on: ubuntu-latest
 
-#    steps:
-#      # Checkout code
-#    - uses: actions/checkout@main
+    steps:
+    # Checkout code
+    - uses: actions/checkout@main
 
-#      # Log into Azure
-#    - uses: azure/login@v1.4.3
-#      with:
-#        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    # Log into Azure
+    - uses: azure/login@v1.4.3
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    #  # Deploy Bicep file
-    #- name: Storage Deployment
-    #  uses: azure/arm-deploy@v1
-    #  with:
-    #    subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
-    #    resourceGroupName: ${{ secrets.AZURE_RG }}
-    #    template: deployment/storage-resource.bicep
-    #    #parameters: 'storagePrefix=mystore storageSKU=Standard_LRS'
-    #    failOnStdErr: false
-
-#      # Deploy Bicep file
-#    - name: Deployment Bicep Resources
-#      uses: azure/arm-deploy@v1
-#      with:
-#        subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
-#        resourceGroupName: ${{ secrets.AZURE_RG }}
-#        template: deployment/main.bicep
-#        #parameters: 'storagePrefix=mystore storageSKU=Standard_LRS'
-#        failOnStdErr: false
+    # Deploy Bicep file
+    - name: Deployment Bicep Resources
+      uses: azure/arm-deploy@v1
+      with:
+        subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+        resourceGroupName: ${{ secrets.AZURE_RG }}
+        template: deployment/main.bicep
+        #parameters: 'storagePrefix=mystore storageSKU=Standard_LRS'
+        failOnStdErr: false

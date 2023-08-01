@@ -16,6 +16,20 @@ az ad sp create-for-rbac --name BicepACR --role contributor --scopes /subscripti
 
 
 
+## NEW - 01/08
+{
+  "clientId": "9f422771-8b5e-4238-88b4-16c8b73c4511",
+  "clientSecret": "8AX8Q~67cmtyv6xoLGGgOMiTyKiZl3vyhPIVadve",
+  "subscriptionId": "ea93148e-4b2f-4f06-b7fb-2c8ecc309d3f",
+  "tenantId": "45e46c0f-a5d5-40dd-b10b-d8311cca261e",
+  "activeDirectoryEndpointUrl": "https://login.microsoftonline.com",
+  "resourceManagerEndpointUrl": "https://management.azure.com/",
+  "activeDirectoryGraphResourceId": "https://graph.windows.net/",
+  "sqlManagementEndpointUrl": "https://management.core.windows.net:8443/",
+  "galleryEndpointUrl": "https://gallery.azure.com/",
+  "managementEndpointUrl": "https://management.core.windows.net/"
+}
+
 ### JSON TO CONTROL THE VERSIONS
 {
   "versions": [
