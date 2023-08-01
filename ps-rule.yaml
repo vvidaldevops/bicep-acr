@@ -1,4 +1,8 @@
 ---
+requires:
+  PSRule: '@pre >=2.8.1'
+  PSRule.Rules.Azure: '@pre >=1.26.1'
+
 include:
   module:
     # Import all the Azure Well-Architected Framework rules
