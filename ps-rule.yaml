@@ -14,14 +14,14 @@ configuration:
   #AZURE_BICEP_PARAMS_FILE_EXPANSION: false
   #AZURE_PARAMETER_FILE_EXPANSION: false
 
-#input:
-#  pathIgnore:
-#    - "*.yml"
-#    - "*.md"
+input:
+  pathIgnore:
+    - "*.yml"
+    - "*.md"
 #    - "*.github/"
 #    #Include test files from modules
-#    - '!**/*.bicep'
-#    - '!deployment/*.bicep'  
+    - '!**/*.bicep'
+    - '!deployment/*.bicep'  
 
 input:
   pathIgnore:
