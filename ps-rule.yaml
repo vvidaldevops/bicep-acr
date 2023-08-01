@@ -16,12 +16,12 @@ configuration:
 
 input:
   pathIgnore:
-    - "*.yml"
-    - "*.md"
-    - "samples/"
+    - '*.yml'
+    - '*.md'
+    - 'samples/*'
 
 #    #Include test files from modules
-    - '!**/*.bicep'
+    #- '!**/*.bicep'
     - '!deployment/*.bicep'  
 
 #input:
