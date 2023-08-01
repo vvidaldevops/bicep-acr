@@ -18,7 +18,7 @@ input:
     - "*.md"
     - "*.github/"
     # Include test files from modules
-    # - '!deployment/*.bicep'
+    - '!deployment/**/*.bicep'
    
 output:
   as: Summary
