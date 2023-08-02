@@ -10,18 +10,11 @@
 #    }
 #}
 
-#Rule 'Azure.Storage.SoftDelete' -Ref 'AZR-000197' -Type 'Microsoft.Storage/storageAccounts', 'Microsoft.Storage/storageAccounts/blobServices' -If { !(IsCloudShell) -and !(IsHnsStorage) -and !(IsFileStorage) } -Tag @{ release = 'GA'; ruleSet = '2020_06' } {
-#    $services = @($TargetObject);
-#    if ($PSRule.TargetType -eq 'Microsoft.Storage/storageAccounts') {
-#        $services = @(GetSubResources -ResourceType 'Microsoft.Storage/storageAccounts/blobServices');
-#    }
-#    if ($services.Length -eq 0) {
-#        return $Assert.Fail($LocalizedData.SubResourceNotFound, 'Microsoft.Storage/storageAccounts/blobServices');
-#    }
-#    foreach ($service in $services) {
-#        $Assert.HasFieldValue($service, 'properties.deleteRetentionPolicy.enabled', $True);
-#    }
-#}
+Rule 'Local.Testing' { 
+
+$services = @($TargetObject);
+    Write-Host $services
+}
 
 ## TESTS
 #Rule 'Azure.ValidateACR.name' -Ref 'AZR-000001' -Type 'Microsoft.ContainerRegistry/registries' -If { IsExport } -Tag @{ release = 'GA'; ruleSet = '2020_12'; 'Azure.WAF/pillar' = 'Cost Optimization'; method = 'in-flight'; } {
@@ -50,28 +43,28 @@
 #    }
 
 # customRule.ps1
-rule Azure.ValidateACR.Rule {
-    #param ($target)
-
-    # Specify the file path
-    $file = "deployment/main.bicep"
-    
-    # Read the content of the file
-    $fileContent = Get-Content -Path $file -Raw
-
-    $containsAcrModules = $fileContent -match ':br'
-
-    if ($containsAcrModules) {
-        return @{
-            Message = "The file $($file) is using ACR Modules"
-            Result = 'PASS'
-        }
-    }
-    else {
-        return @{
-            Message = "The file $($file) is not using ACR Modules"
-            Result = 'FAIL'
-        }
-    }
-}
+#rule Azure.ValidateACR.Rule {
+#    #param ($target)
+#
+#    # Specify the file path
+#    $file = "deployment/main.bicep"
+#    
+#    # Read the content of the file
+#    $fileContent = Get-Content -Path $file -Raw
+#
+#    $containsAcrModules = $fileContent -match ':br'
+#
+#    if ($containsAcrModules) {
+#        return @{
+#            Message = "The file $($file) is using ACR Modules"
+#            Result = 'PASS'
+#        }
+#    }
+#    else {
+#        return @{
+#            Message = "The file $($file) is not using ACR Modules"
+#            Result = 'FAIL'
+#        }
+#    }
+#}
 
