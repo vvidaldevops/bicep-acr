@@ -20,7 +20,7 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-     - name: Run PSRule analysis
+    - name: Run PSRule analysis
       #continue-on-error: true
       uses: microsoft/ps-rule@v2.9.0
       with:
