@@ -22,7 +22,7 @@ param appId string = '01'
 param appname string = 'app123'
 
 param tags object = {
-  owner: 'JM Family'
+  owner: 'JMF'
   environment: 'POC'
   department: 'IT'
   project: 'POC Project'
