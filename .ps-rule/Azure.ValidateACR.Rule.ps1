@@ -54,7 +54,7 @@ rule Azure.ValidateACR.Rule {
     #param ($target)
 
     # Specify the file path
-    $file = "../deployemnt/main.bicep"
+    $file = "deployemnt/main.bicep"
     
     # Read the content of the file
     $fileContent = Get-Content -Path $file -Raw
