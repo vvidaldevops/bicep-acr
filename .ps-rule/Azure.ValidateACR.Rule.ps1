@@ -59,18 +59,18 @@ rule Azure.ValidateACR.Rule {
     # Read the content of the file
     $fileContent = Get-Content -Path $file -Raw
 
-    #$content = Get-Content -Path $target.Path
+    $containsAcrModules = $fileContent -match ':br'
 
-    if ($fileContent -match ':br') {
+    if ($containsAcrModules) {
         return @{
-            Message = "The file $($target.Path) is using ACR Modules"
+            Message = "The file $($file) is in ACR Modules"
             Result = 'PASS'
         }
     }
     else {
         return @{
-            Message = "The file $($target.Path) is not using ACR Modules"
-            Result = 'Fail'
+            Message = "The file $($file) is not in ACR Modules"
+            Result = 'FAIL'
         }
     }
 }
