@@ -23,7 +23,7 @@ jobs:
     - name: Check ACR Modules
       shell: pwsh
       run: |
-        $file = "main.bicep"
+        $file = "deployment/main.bicep"
 
         # Read the content of the file
         $fileContent = Get-Content -Path $file -Raw
