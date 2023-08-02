@@ -23,7 +23,7 @@ input:
     - 'metadata.json'
 
 #    #Include test files from modules
-    #- '!**/*.bicep' 
+    - '!**/*.bicep' 
     - "!**/.bicepparam"
 
 #execution:
