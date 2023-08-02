@@ -6,7 +6,7 @@ include:
   module:
     # Import all the Azure Well-Architected Framework rules
   - PSRule.Rules.Azure
-    Assert-PSRule  -InputPath 'br:' 
+   # Assert-PSRule  -InputPath 'br:' 
 configuration:
   # Enable code analysis of bicep files
   AZURE_BICEP_FILE_EXPANSION: true
