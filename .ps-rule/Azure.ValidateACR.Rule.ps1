@@ -63,13 +63,13 @@ rule Azure.ValidateACR.Rule {
 
     if ($containsAcrModules) {
         return @{
-            Message = "The file $($file) is in ACR Modules"
+            Message = "The file $($file) is using ACR Modules"
             Result = 'PASS'
         }
     }
     else {
         return @{
-            Message = "The file $($file) is not in ACR Modules"
+            Message = "The file $($file) is not using ACR Modules"
             Result = 'FAIL'
         }
     }
