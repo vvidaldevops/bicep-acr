@@ -10,7 +10,7 @@ param appId = '01'
 param appname = 'app123'
 
 param tags = {
-  owner: 'JM Family'
+  owner: 'JMF'
   environment: 'POC'
   department: 'IT'
   project: 'POC Project'
