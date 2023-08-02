@@ -29,7 +29,7 @@ jobs:
         #outputFormat: Sarif
         #outputPath: reports/ps-rule-results.sarif
         inputPath: 'deployment/'
-        #source: '.'
+        source: '.'
         #env:
           # Define environment variables using GitHub encrypted secrets
           # AZURE_CLIENT_ID: ${{ secrets.BICEP_REGISTRY_CLIENTID }}
