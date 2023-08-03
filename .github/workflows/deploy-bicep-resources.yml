@@ -24,10 +24,10 @@ jobs:
 
         # Check if the file contains "module" and "br:vidalabacr.azurecr.io/bicep/"
         if ($fileContent -match 'module' -and $fileContent -match 'br:vidalabacr\.azurecr\.io/bicep/') {
-            Write-Output "[PASS] Required ACR module is being used"
+            Write-Output "[PASS] Required ACR modules is being used"
         }
         else {
-            Write-Output "[FAIL]: Required ACR module is not been used'n RECOMMEND: Consider using the allowed modules "
+            Write-Output "[FAIL]: Required ACR modules is not been used'n RECOMMEND: Consider using the allowed modules "
             exit 1 
         }
                             
