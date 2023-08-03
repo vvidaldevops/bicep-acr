@@ -117,7 +117,7 @@ param accessTier string
 
 // App Service
 //*****************************************************************************************************
-module appService 'br:vidalabacr.azurecr.io/bicep/patterns/appservice:v1.0.0' = {
+module appService 'br:vidalabacr2.azurecr.io/bicep/patterns/appservice:v1.0.0' = {
   name: 'appServiceModule2'
   params: {
     bu: bu
