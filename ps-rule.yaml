@@ -1,18 +1,4 @@
-## Custom Rule
-#rule:
-#  # Enable local rules
-#  includeLocal: true
-#
-##  exclude:
-##  - 'Azure.Resource.UseTags'
-#
-#binding:
-#  # Bindings are required for local rules
-#  targetType:
-#  - type
-#  - resourceType
-
-## Built in Rules
+# Built in Rules
 requires:
   PSRule: '@pre >=2.8.1'
   PSRule.Rules.Azure: '@pre >=1.26.1'
