@@ -26,12 +26,12 @@ input:
   - '!**/*.bicep' 
   - "!**/.bicepparam"
 
-execution:
-  # Disable warnings that files cannot be processed
-  notProcessedWarning: false
+#execution:
+#  # Disable warnings that files cannot be processed
+#  notProcessedWarning: false
 
 output:
-  as: Summary
+  #as: Summary
   #culture: [ 'en-US' ]
   # Show results for rules with the Fail, Pass, or Error outcome
-  #outcome: 'Processed'
+  outcome: 'Processed'
