@@ -40,24 +40,23 @@ jobs:
         $file = "deployment/main.bicep"
 
         # Read the content of the file
-        $fileContent = Get-Content -Path $file -Raw
-        
-        # Define regular expressions for matching the phrases and comments
-        $moduleRegex = '(?m)^.*\bmodule\b.*$'
-        $acrRegex = '(?m)^.*\bbr:vidalabacr\.azurecr\.io/bicep/\b.*$'
-        $commentBlockRegex = '(?s)(?m)(?<=/\*).*?(?=\*/)|(?m)//.*$'
-        
-        # Remove comment blocks from the content
-        $cleanedContent = $fileContent -replace $commentBlockRegex
-        
-        # Check if the file contains both "module" and "br:vidalabacr.azurecr.io/bicep/"
-        if ($cleanedContent -match $moduleRegex -and $cleanedContent -match $acrRegex) {
-          Write-Output "[PASS] Required ACR modules is being used"
+        $fileContent = Get-Content -Path $file
+
+        # Check if all lines starting with "module" contain 'br:vidalabacr.azurecr.io'
+        $pass = $true
+        foreach ($line in $fileContent | Where-Object { $_ -match '^module' }) {
+            if ($line -notmatch 'br:vidalabacr.azurecr.io/') {
+                Write-Output "[FAIL] Line '$line' does not contain the required ACR modules'."
+                $pass = $false
+            }
+        }
+
+        if ($pass) {
+            Write-Output "[PASS] Required ACR modules are being used"
         }
         else {
-          Write-Output "[FAIL]: Required ACR modules is not been used`n RECOMMEND: Consider using the allowed modules "
-          exit 1
-        }      
+            exit 1 # Stop script execution with a non-zero exit code to indicate failure
+        } 
                             
     # Log into Azure
     - name: Login to Azure  
