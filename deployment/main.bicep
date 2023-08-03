@@ -117,7 +117,7 @@ param accessTier string
 
 // App Service
 //*****************************************************************************************************
-module appService 'br:vidalabacr2.azurecr.io/bicep/patterns/appservice:v1.0.0' = {
+module appService 'br:vidalabacr.azurecr.io/bicep/patterns/appservice:v1.0.0' = {
 //module appService 'br/ACR-LAB:bicep/patterns/appservice:v1.0.0' = {
 //module appService '../../../01-COMPONENTS-and-PATTERNS/bicep-modules/modules/patterns/appservice/simple-appservice.bicep' = {
   name: 'appServiceModule2'
@@ -145,7 +145,7 @@ module appService 'br:vidalabacr2.azurecr.io/bicep/patterns/appservice:v1.0.0' =
 
 // Function App
 //*****************************************************************************************************
-module functionAppModule 'br:vidalabacr2.azurecr.io/bicep/patterns/functionapp:v1.0.0' = {
+module functionAppModule 'br:vidalabacr.azurecr.io/bicep/patterns/functionapp:v1.0.0' = {
 // module functionAppModule '../../../01-COMPONENTS-and-PATTERNS/bicep-modules/modules/patterns/functionapp/simple-functionapp.bicep' = {
   name: 'functionAppModule2'
   params: {
@@ -174,7 +174,7 @@ module functionAppModule 'br:vidalabacr2.azurecr.io/bicep/patterns/functionapp:v
 
 // Storage Account for Data
 //*****************************************************************************************************
-module storageAccountModule 'br:vidalabacr2.azurecr.io/bicep/patterns/storage-account:v1.0.0' = {
+module storageAccountModule 'br:vidalabacr.azurecr.io/bicep/patterns/storage-account:v1.0.0' = {
 // module storageAccountModule 'br/ACR-LAB:bicep/patterns/storage-account:v1.0.0' = {
 // module storageAccountModule '../../../01-COMPONENTS-and-PATTERNS/bicep-modules/modules/patterns/storage-account/simple-storage.bicep' = {  
   name: 'storageAccountModule2'
