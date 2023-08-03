@@ -18,18 +18,17 @@ configuration:
 
 input:
   pathIgnore:
-    - '*.yml'
-    - '*.md'
-    - 'bicepconfig.json'
-    - 'metadata.json'
+  - '*.yml'
+  - '*.md'
+  - 'bicepconfig.json'
+  - 'metadata.json'
+#Include test files from modules
+  - '!**/*.bicep' 
+  - "!**/.bicepparam"
 
-#    #Include test files from modules
-    - '!**/*.bicep' 
-    - "!**/.bicepparam"
-
-#execution:
+execution:
   # Disable warnings that files cannot be processed
-  #notProcessedWarning: false
+  notProcessedWarning: false
 
 output:
   as: Summary
