@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout code
+    # Checkout code
     - uses: actions/checkout@v2
 
     - name: Check ACR Modules
@@ -28,12 +28,10 @@ jobs:
         }
         else {
             Write-Output "[FAIL]: Required ACR module is not been used'n RECOMMEND: Consider using the allowed modules "
-            #Write-Output "| RECOMMEND-TEST: Consider using the allowed modules"
             exit 1 
         }
-        Start-Sleep -Seconds 5
-                    
-      # Log into Azure
+                            
+    # Log into Azure
     - name: Login to Azure  
       uses: azure/login@v1.4.3
       with:
@@ -50,10 +48,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout code
+    # Checkout code
     - uses: actions/checkout@v2
                     
-      # Log into Azure
+    # Log into Azure
     - name: Login to Azure  
       uses: azure/login@v1.4.3
       with:
