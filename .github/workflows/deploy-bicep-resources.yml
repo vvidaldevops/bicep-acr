@@ -7,13 +7,13 @@ on:
   workflow_dispatch:
 
 jobs:
-  Check-ACR-Modules:
+  PSRule-Analysis:
     runs-on: ubuntu-latest
 
     steps:
       # Checkout code
     - uses: actions/checkout@v2
-                    
+
     - name: Check ACR Modules
       shell: pwsh
       run: |
@@ -21,26 +21,15 @@ jobs:
 
         # Read the content of the file
         $fileContent = Get-Content -Path $file -Raw
-  
-        # Search for occurrences of 'br:'
-        $brMatches = $fileContent | Select-String -Pattern 'br:'
-        #$azurecrMatches = $fileContent | Select-String -Pattern '.azurecr.io'
-  
-        # Output the results
-        if ($brMatches) {
-            Write-Host "Found 'br:' in the file."
-        } else {
-            Write-Host "No occurrences of 'br:' in the file. Stopping..."
-            #exit 1 
+
+        # Check if the file contains "module" and "br:vidalabacr.azurecr.io/bicep/"
+        if ($fileContent -match 'module' -and $fileContent -match 'br:vidalabacr\.azurecr\.io/bicep/') {
+            Write-Output "PASS: The file contains both 'module' and 'br:vidalabacr.azurecr.io/bicep/'."
         }
-
-  PSRule-Analysis:
-    needs: [Check-ACR-Modules]
-    runs-on: ubuntu-latest
-
-    steps:
-      # Checkout code
-    - uses: actions/checkout@v2
+        else {
+            Write-Output "FAIL: The file does not contain both 'module' and 'br:vidalabacr.azurecr.io/bicep/'."
+            exit 1 # Explicitly exit with a non-zero code to indicate failure
+        }
                     
       # Log into Azure
     - name: Login to Azure  
@@ -56,8 +45,8 @@ jobs:
         modules: 'PSRule.Rules.Azure'
         #outputFormat: Sarif
         #outputPath: reports/ps-rule-results.sarif
-        inputPath: 'deployment/'
-        source: '.'
+        #inputPath: 'deployment/'
+        #source: '.'
         #env:
           # Define environment variables using GitHub encrypted secrets
           # AZURE_CLIENT_ID: ${{ secrets.BICEP_REGISTRY_CLIENTID }}
