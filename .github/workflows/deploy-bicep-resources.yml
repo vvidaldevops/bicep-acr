@@ -35,7 +35,7 @@ jobs:
           Write-Output "[PASS] Required ACR modules is being used"
         }
         else {
-          Write-Output "[FAIL]: Required ACR modules is not been used'n RECOMMEND: Consider using the allowed modules "
+          Write-Output "[FAIL]: Required ACR modules is not been used`n RECOMMEND: Consider using the allowed modules "
           exit 1
         }      
                             
