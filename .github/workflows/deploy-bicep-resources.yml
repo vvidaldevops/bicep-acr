@@ -55,8 +55,9 @@ jobs:
             Write-Output "[PASS] Required ACR modules are being used"
         }
         else {
-            exit 1 # Stop script execution with a non-zero exit code to indicate failure
-        } 
+            exit 1
+        }
+        Start-Sleep -Seconds 10
                             
     # Log into Azure
     - name: Login to Azure  
