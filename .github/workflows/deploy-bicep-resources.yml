@@ -7,6 +7,33 @@ on:
   workflow_dispatch:
 
 jobs:
+  Check-ACR-Modules:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout code
+    - uses: actions/checkout@v2
+                    
+    - name: Check ACR Modules
+      shell: pwsh
+      run: |
+        $file = "deployment/main.bicep"
+
+        # Read the content of the file
+        $fileContent = Get-Content -Path $file -Raw
+  
+        # Search for occurrences of 'br:'
+        $brMatches = $fileContent | Select-String -Pattern 'br:'
+        #$azurecrMatches = $fileContent | Select-String -Pattern '.azurecr.io'
+  
+        # Output the results
+        if ($brMatches) {
+            Write-Host "Found 'br:' in the file."
+        } else {
+            Write-Host "No occurrences of 'br:' in the file. Stopping..."
+            exit 1 
+        }
+
   PSRule-Analysis:
     runs-on: ubuntu-latest
 
@@ -19,26 +46,6 @@ jobs:
       uses: azure/login@v1.4.3
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-    #- name: Check ACR Modules
-    #  shell: pwsh
-    #  run: |
-    #    $file = "deployment/main.bicep"
-
-    #    # Read the content of the file
-    #    $fileContent = Get-Content -Path $file -Raw
-  
-    #    # Search for occurrences of 'br:'
-    #    $brMatches = $fileContent | Select-String -Pattern 'br:'
-    #    #$azurecrMatches = $fileContent | Select-String -Pattern '.azurecr.io'
-  
-    #    # Output the results
-    #    if ($brMatches) {
-    #        Write-Host "Found 'br:' in the file."
-    #    } else {
-    #        Write-Host "No occurrences of 'br:' in the file."
-    #        exit 1 
-    #    }
 
     - name: Run PSRule analysis
       #continue-on-error: true
