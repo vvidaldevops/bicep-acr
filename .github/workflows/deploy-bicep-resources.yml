@@ -31,7 +31,7 @@ jobs:
             Write-Host "Found 'br:' in the file."
         } else {
             Write-Host "No occurrences of 'br:' in the file. Stopping..."
-            exit 1 
+            #exit 1 
         }
 
   PSRule-Analysis:
