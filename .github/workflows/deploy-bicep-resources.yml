@@ -24,11 +24,12 @@ jobs:
 
         # Check if the file contains "module" and "br:vidalabacr.azurecr.io/bicep/"
         if ($fileContent -match 'module' -and $fileContent -match 'br:vidalabacr\.azurecr\.io/bicep/') {
-            Write-Output "PASS: The file contains both 'module' and 'br:vidalabacr.azurecr.io/bicep/'."
+            Write-Output "[PASS] Required ACR module is being used"
         }
         else {
-            Write-Output "FAIL: The file does not contain both 'module' and 'br:vidalabacr.azurecr.io/bicep/'."
-            exit 1 # Explicitly exit with a non-zero code to indicate failure
+            Write-Output "[FAIL]: Required ACR module is not been used'n RECOMMEND: Consider using the allowed modules "
+            Write-Output "| RECOMMEND-TEST: Consider using the allowed modules"
+            exit 1 
         }
                     
       # Log into Azure
@@ -38,27 +39,11 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
     - name: Run PSRule analysis
-      #continue-on-error: true
       uses: microsoft/ps-rule@v2.9.0
       with:
         version: '1.11.1'
         modules: 'PSRule.Rules.Azure'
-        #outputFormat: Sarif
-        #outputPath: reports/ps-rule-results.sarif
-        #inputPath: 'deployment/'
-        #source: '.'
-        #env:
-          # Define environment variables using GitHub encrypted secrets
-          # AZURE_CLIENT_ID: ${{ secrets.BICEP_REGISTRY_CLIENTID }}
-          # AZURE_CLIENT_SECRET: ${{ secrets.BICEP_REGISTRY_CLIENTSECRET }}
-          # AZURE_TENANT_ID: ${{ secrets.BICEP_REGISTRY_TENANTID }}  
-       
-    #- name: Upload results to security tab
-    #  uses: github/codeql-action/upload-sarif@v2
-    #  with:
-    #    sarif_file: reports/ps-rule-results.sarif
-    #    category: PSRule
-
+ 
   Preview-Bicep-Changes:
     needs: [PSRule-Analysis]
     runs-on: ubuntu-latest
