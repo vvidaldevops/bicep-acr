@@ -14,26 +14,6 @@ jobs:
     # Checkout code
     - uses: actions/checkout@v2
 
-      #- name: Check ACR Modules
-      #  shell: pwsh
-      #  run: |
-      #    $file = "deployment/main.bicep"
-  
-      #    # Read the content of the file
-      #    $fileContent = Get-Content -Path $file -Raw
-    
-      #    # Search for occurrences of 'br:'
-      #    $brMatches = $fileContent | Select-String -Pattern 'br:'
-      #    #$azurecrMatches = $fileContent | Select-String -Pattern '.azurecr.io'
-    
-      #    # Output the results
-      #    if ($brMatches) {
-      #       Write-Output "[PASS] Required ACR modules is being used"
-      #    } else {
-      #        Write-Output "[FAIL]: Required ACR modules is not been used`n RECOMMEND: Consider using the allowed modules "
-      #        exit 1 
-      #    }
-
     - name: Check ACR Modules
       shell: pwsh
       run: |
