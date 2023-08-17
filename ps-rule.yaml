@@ -18,8 +18,8 @@ configuration:
 
 input:
   pathIgnore:
-  #- '*.yml'
-  #- '*.md'
+  - '*.yml'
+  - '*.md'
   - 'bicepconfig.json'
   - 'metadata.json'
 #Include test files from modules
