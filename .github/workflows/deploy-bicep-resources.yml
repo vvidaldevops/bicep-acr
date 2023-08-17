@@ -50,6 +50,8 @@ jobs:
       with:
         version: '1.11.1'
         modules: 'PSRule.Rules.Azure'
+        inputPath: 'deployment/'
+        source: '.'
  
   Preview-Bicep-Changes:
     needs: [PSRule-Analysis]
