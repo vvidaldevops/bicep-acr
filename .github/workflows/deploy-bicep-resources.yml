@@ -2,7 +2,7 @@ name: Azure ARM
 
 on:
   push:
-    branches: [ "feature/PSRule" ]
+    branches: [ "feature/psrule-custom-action" ]
 
   workflow_dispatch:
 
@@ -20,21 +20,8 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    - name: Run PSRule analysis
-      #continue-on-error: true
-      uses: microsoft/ps-rule@v2.9.0
-      with:
-        version: '1.11.1'
-        modules: 'PSRule.Rules.Azure'
-        #outputFormat: Sarif
-        #outputPath: reports/ps-rule-results.sarif
-        inputPath: 'deployment/'
-        source: '.'
-        #env:
-          # Define environment variables using GitHub encrypted secrets
-          # AZURE_CLIENT_ID: ${{ secrets.BICEP_REGISTRY_CLIENTID }}
-          # AZURE_CLIENT_SECRET: ${{ secrets.BICEP_REGISTRY_CLIENTSECRET }}
-          # AZURE_TENANT_ID: ${{ secrets.BICEP_REGISTRY_TENANTID }}  
+    - name: Run PSRule
+      uses: pablorechimon/psrule-bicep@latest
        
     #- name: Upload results to security tab
     #  uses: github/codeql-action/upload-sarif@v2

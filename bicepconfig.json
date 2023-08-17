@@ -1,9 +1,0 @@
-{
-    "experimentalFeaturesEnabled": {
-      "paramsFiles": true
-    },
-     "credentialPrecedence": [
-      "Environment",
-      "AzureCLI"
-    ]
-}
