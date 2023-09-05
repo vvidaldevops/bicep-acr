@@ -190,3 +190,5 @@ module storageAccountModule 'br:vidalabacr.azurecr.io/bicep/patterns/storage-acc
   }
 }
 //******************************************************************************************************
+
+
