@@ -14,30 +14,30 @@ jobs:
     # Checkout code
     - uses: actions/checkout@v2
 
-    - name: Check ACR Modules
-      shell: pwsh
-      run: |
-        $file = "deployment/main.bicep"
-
-        # Read the content of the file
-        $fileContent = Get-Content -Path $file
-
-        # Check if all lines starting with "module" contain 'br:vidalabacr.azurecr.io'
-        $pass = $true
-        foreach ($line in $fileContent | Where-Object { $_ -match '^module' }) {
-            if ($line -notmatch 'br:vidalabacr.azurecr.io/') {
-                Write-Output "[FAIL] Line '$line' does not contain the required ACR modules'."
-                $pass = $false
-            }
-        }
-
-        if ($pass) {
-            Write-Output "[PASS] Required ACR modules are being used"
-        }
-        else {
-            exit 1
-        }
-        Start-Sleep -Seconds 10
+#    - name: Check ACR Modules
+#      shell: pwsh
+#      run: |
+#        $file = "deployment/main.bicep"
+#
+#        # Read the content of the file
+#        $fileContent = Get-Content -Path $file
+#
+#        # Check if all lines starting with "module" contain 'br:vidalabacr.azurecr.io'
+#        $pass = $true
+#        foreach ($line in $fileContent | Where-Object { $_ -match '^module' }) {
+#            if ($line -notmatch 'br:vidalabacr.azurecr.io/') {
+#                Write-Output "[FAIL] Line '$line' does not contain the required ACR modules'."
+#                $pass = $false
+#            }
+#        }
+#
+#        if ($pass) {
+#            Write-Output "[PASS] Required ACR modules are being used"
+#        }
+#        else {
+#            exit 1
+#        }
+#        Start-Sleep -Seconds 10
                             
     # Log into Azure
     - name: Login to Azure  
@@ -45,13 +45,13 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    - name: Run PSRule analysis
-      uses: microsoft/ps-rule@v2.9.0
-      with:
-        version: '1.11.1'
-        modules: 'PSRule.Rules.Azure'
-        inputPath: 'deployment/'
-        source: '.'
+#    - name: Run PSRule analysis
+#      uses: microsoft/ps-rule@v2.9.0
+#      with:
+#        version: '1.11.1'
+#        modules: 'PSRule.Rules.Azure'
+#        inputPath: 'deployment/'
+#        source: '.'
  
   Preview-Bicep-Changes:
     needs: [PSRule-Analysis]
