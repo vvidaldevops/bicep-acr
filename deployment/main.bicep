@@ -122,7 +122,6 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2021-09-01' = {
       bypass: 'AzureServices'
     }
     accessTier: 'Hot'
-    allowBlobPublicAccess
     allowCrossTenantReplication: false
     allowSharedKeyAccess: true
     encryption: {
