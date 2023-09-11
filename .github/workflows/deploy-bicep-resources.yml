@@ -45,13 +45,13 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-#    - name: Run PSRule analysis
-#      uses: microsoft/ps-rule@v2.9.0
-#      with:
-#        version: '1.11.1'
-#        modules: 'PSRule.Rules.Azure'
-#        inputPath: 'deployment/'
-#        source: '.'
+    - name: Run PSRule analysis
+      uses: microsoft/ps-rule@v2.9.0
+      with:
+        version: '1.11.1'
+        modules: 'PSRule.Rules.Azure'
+        inputPath: 'deployment/'
+        source: '.'
  
   Preview-Bicep-Changes:
     needs: [PSRule-Analysis]

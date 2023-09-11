@@ -1,4 +1,3 @@
-# Built in Rules
 requires:
   PSRule: '@pre >=2.8.1'
   PSRule.Rules.Azure: '@pre >=1.26.1'
@@ -18,17 +17,18 @@ configuration:
 
 input:
   pathIgnore:
-  #- '*.yml'
-  #- '*.md'
-  - 'bicepconfig.json'
-  - 'metadata.json'
-#Include test files from modules
-  - '!**/*.bicep' 
-  - "!**/.bicepparam"
+    - '*.yml'
+    - '*.md'
+    - 'bicepconfig.json'
+    - 'metadata.json'
+
+#    #Include test files from modules
+    - '!**/*.bicep' 
+    - "!**/.bicepparam"
 
 #execution:
-#  # Disable warnings that files cannot be processed
-#  notProcessedWarning: false
+  # Disable warnings that files cannot be processed
+  #notProcessedWarning: false
 
 output:
   as: Summary
