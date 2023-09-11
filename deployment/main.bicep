@@ -79,3 +79,69 @@ resource sqlServer 'Microsoft.Sql/servers@2022-05-01-preview' = {
     administratorLoginPassword: administratorLoginPassword
   }
 }
+
+@description('Resource Tags')
+param tags object
+//*****************************************************************************************************
+
+// Storage Parameters
+//*****************************************************************************************************
+@description('The Storage Account tier')
+param accountTier string = 'Standard_LRS'
+
+@description('Allow or Deny the storage public access. Default is false')
+param allowBlobPublicAccess string = 'Allow'
+//*****************************************************************************************************
+
+// Storage Variables
+//*****************************************************************************************************
+@description('Storage Kind')
+var storageKind = 'StorageV2'
+
+@description('Minimum TLS Vesion')
+var minimumTlsVersion = 'TLS1_2'
+
+@description('HTTP Only?')
+var HttpsTrafficOnly = true
+//*****************************************************************************************************
+
+
+// Storage Account Resource
+//*****************************************************************************************************
+resource storageAccount 'Microsoft.Storage/storageAccounts@2021-09-01' = {
+  // name: storageAccountName
+  name: 'teststg'
+  location: location
+  kind: storageKind
+  sku: {
+    name: accountTier
+  }
+  properties: {
+    networkAcls: {
+      defaultAction: allowBlobPublicAccess
+      bypass: 'AzureServices'
+    }
+    accessTier: 'Hot'
+    allowBlobPublicAccess
+    allowCrossTenantReplication: false
+    allowSharedKeyAccess: true
+    encryption: {
+      keySource: 'Microsoft.Storage'
+      requireInfrastructureEncryption: true
+      services: {
+        blob: {
+          enabled: true
+        }
+        file: {
+          enabled: true
+        }
+      }
+    }    
+    minimumTlsVersion: minimumTlsVersion
+    supportsHttpsTrafficOnly: HttpsTrafficOnly 
+  }
+  tags: tags
+}
+output storageAccountId string = storageAccount.id
+output storageAccountName string = storageAccount.name
+//*****************************************************************************************************
