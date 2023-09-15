@@ -1,4 +1,33 @@
-/ Required Parameters - Azure Cache for Redis
+// Common Parameters
+//*****************************************************************************************************
+@description('(Require) The Azure region into which the resources should be deployed.')
+param location string
+
+@description('(Require) The deployment stage where the resources.')
+@allowed([
+   'poc'
+   'dev'
+   'qa' 
+   'uat' 
+   'prd' 
+])
+param stage string
+
+@description('(Require) Resource Tags')
+param tags object
+
+@description('(Require) The business unit owning the resources.')
+@allowed([
+   'set' 
+   'setf' 
+   'jmf'
+   'jmfe' 
+])
+param businessUnit string
+//*****************************************************************************************************
+
+
+// Required Parameters - Azure Cache for Redis
 //*****************************************************************************************************
 @description('(Require) The application name. Nine (9) characters maximum')
 @maxLength(9)
@@ -50,7 +79,7 @@ param redisSubnetId string = ''
 
 // Azure Cache for Redis
 //*****************************************************************************************************
-module redisCache 'br:vidalabacr.azurecr.io/bicep/components/redis-cache:v1.0.0' = {
+module redisCache 'br:vidalabacr.azurecr.io/bicep/components/redis:v1.0.0' = {
   name: 'redisCacheModule'
   params: {
     businessUnit: businessUnit
@@ -63,7 +92,7 @@ module redisCache 'br:vidalabacr.azurecr.io/bicep/components/redis-cache:v1.0.0'
     redisCapacity: redisCapacity
     redisIdentityType: redisIdentityType
     location: location
-    workspaceId: workspaceId
+    // workspaceId: workspaceId
     redisSubnetId: redisSubnetId
     tags: tags
   }
