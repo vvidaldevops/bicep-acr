@@ -80,7 +80,7 @@ param maxmemoryreserved string = '25'
 
 // Azure Cache for Redis
 //*****************************************************************************************************
-module redisCache 'br:vidalabacr.azurecr.io/bicep/components/redis:v1.0.0' = {
+module redisCache 'br:vidalabacr.azurecr.io/bicep/components/redis:v2' = {
   name: 'redisCacheModule'
   params: {
     businessUnit: businessUnit
