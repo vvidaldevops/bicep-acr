@@ -1,29 +1,31 @@
 // Common Parameters
 //*****************************************************************************************************
-@description('(Require) The Azure region into which the resources should be deployed.')
-param location string
+@description('desxcription')
+param location string = 'EastUS'
 
-@description('(Require) The deployment stage where the resources.')
-@allowed([
-   'poc'
-   'dev'
-   'qa' 
-   'uat' 
-   'prd' 
-])
-param stage string
+@description('desxcription')
+param businessUnit string= 'jmf'
 
-@description('(Require) Resource Tags')
-param tags object
+@description('desxcription')
+param stage string = 'dev'
 
-@description('(Require) The business unit owning the resources.')
-@allowed([
-   'set' 
-   'setf' 
-   'jmf'
-   'jmfe' 
-])
-param businessUnit string
+@description('desxcription')
+param role string = 'aut'
+
+@description('''  ''')
+param tags object = {
+    ApplicationName: 'modulestest'
+    ApplicationOwner: 'Test'
+    AppID: 'Test'
+    BU: 'SET'
+    Description: 'Test'
+    ServiceLevel: 'Test'
+    Environment: 'dev'
+    Region: 'Test'
+    Requester: 'Test'
+    Recovery: 'Test'
+    DataCI: 'Test'
+}
 //*****************************************************************************************************
 
 
@@ -35,11 +37,7 @@ param redisName string
 
 @description('(Require) The role of the resource. Two (2) characters maximum')
 @maxLength(2)
-param redisAppId string
-
-@description('(Require) The role of the resource. Four (4) characters maximum')
-@maxLength(4)
-param redisRole string
+param redisAppId string = 'a'
 
 @description('The type of Redis cache to deploy. Valid values: (Basic, Standard, Premium)')
 @allowed([
@@ -86,7 +84,7 @@ module redisCache 'br:vidalabacr.azurecr.io/bicep/components/redis:v1.0.0' = {
     stage: stage
     redisName: redisName
     redisAppId: redisAppId
-    redisRole: redisRole
+    redisRole: role
     redisSkuName: redisSkuName
     redisSkuFamily: redisSkuFamily
     redisCapacity: redisCapacity
