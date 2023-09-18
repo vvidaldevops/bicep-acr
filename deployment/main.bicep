@@ -75,7 +75,7 @@ param redisIdentityType string = 'SystemAssigned'
 param redisSubnetId string = ''
 
 @description('Value in megabytes reserved for non-cache usage per shard e.g. failover. PSRule recomendation: Value in megabytes reserved for non-cache usage per shard e.g. failover. ')
-param maxmemoryreserved string = '25'
+param maxmemoryreserved string = '614'
 //*****************************************************************************************************
 
 // Azure Cache for Redis
