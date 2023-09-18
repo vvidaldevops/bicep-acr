@@ -24,4 +24,5 @@ param redisSkuFamily = 'P'
 param redisCapacity = 1
 param redisIdentityType = 'SystemAssigned'
 param redisSubnetId = ''
+param maxmemoryreserved = '25'
 

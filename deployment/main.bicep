@@ -73,6 +73,9 @@ param redisIdentityType string = 'SystemAssigned'
 
 @description('The full resource ID of a subnet in a virtual network to deploy the Redis cache in. Example format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/Microsoft.{Network,ClassicNetwork}/VirtualNetworks/vnet1/subnets/subnet1')
 param redisSubnetId string = ''
+
+@description('Value in megabytes reserved for non-cache usage per shard e.g. failover. PSRule recomendation: Value in megabytes reserved for non-cache usage per shard e.g. failover. ')
+param maxmemoryreserved string = '25'
 //*****************************************************************************************************
 
 // Azure Cache for Redis
@@ -89,6 +92,7 @@ module redisCache 'br:vidalabacr.azurecr.io/bicep/components/redis:v1.0.0' = {
     redisSkuFamily: redisSkuFamily
     redisCapacity: redisCapacity
     redisIdentityType: redisIdentityType
+    maxmemoryreserved: maxmemoryreserved
     location: location
     // workspaceId: workspaceId
     redisSubnetId: redisSubnetId
