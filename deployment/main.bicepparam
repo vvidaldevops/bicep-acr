@@ -1,12 +1,24 @@
 using './main.bicep'
 
-param location = ''
-param stage = 'poc'
-param tags = {}
-param businessUnit = 'set'
+param location = 'EastUS'
+param businessUnit = 'jmf'
+param stage = 'dev'
+param role = 'aut'
+param tags = {
+  ApplicationName: 'modulestest'
+  ApplicationOwner: 'Test'
+  AppID: 'Test'
+  BU: 'SET'
+  Description: 'Test'
+  ServiceLevel: 'Test'
+  Environment: 'dev'
+  Region: 'Test'
+  Requester: 'Test'
+  Recovery: 'Test'
+  DataCI: 'Test'
+}
 param redisName = ''
-param redisAppId = ''
-param redisRole = ''
+param redisAppId = 'a'
 param redisSkuName = 'Standard'
 param redisSkuFamily = 'P'
 param redisCapacity = 1
